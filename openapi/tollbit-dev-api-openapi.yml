@@ -1,0 +1,123 @@
+openapi: 3.0.0
+info:
+  title: TollBit Auth Tokens Dev API
+  version: v2
+  description: 'TollBit is the web stack for the agentic internet: publishers analyze, control, and monetize AI agent access to their content. This API lets developers and AI agents discover licensable content (Licensed Search), fetch rates and license options, mint one-time signed access tokens, retrieve licensed or indexed content, self-report usage, and list a property''s content catalog. Reconstructed by API Evangelist from TollBit''s published per-operation OpenAPI fragments (docs.tollbit.com/reference).'
+  contact:
+    name: TollBit
+    email: team@tollbit.com
+    url: https://tollbit.com
+  x-apievangelist:
+    generated: '2026-07-21'
+    method: searched
+    source: https://docs.tollbit.com/reference (per-operation OpenAPI fragments merged; llms.txt index)
+    note: Reconstructed from TollBit's published per-operation OpenAPI 3.0 fragments. Only real /dev/* and subdomain endpoints included; a foreign ReadMe sample spec present on two reference pages was excluded.
+servers:
+- url: https://gateway.tollbit.com
+  description: Production API gateway
+tags:
+- name: Dev
+paths:
+  /dev/v1/webhook/history:
+    get:
+      operationId: getWebhookHistory
+      summary: Get History
+      description: 'Get the history of webhooks within an optional lookback window, including
+
+        specific content URLs and last attempted delivery time and status.
+
+        '
+      security:
+      - TollbitKey: []
+      parameters:
+      - name: next-token
+        in: query
+        required: false
+        description: Optional pagination token. Response includes a token to retrieve the next page if available.
+        schema:
+          type: string
+      - name: size
+        in: query
+        required: false
+        description: Number of items per page. Default 25. Max 1000.
+        schema:
+          type: integer
+          default: 25
+          maximum: 1000
+      - name: days-ago
+        in: query
+        required: false
+        description: Number of days back from current date to retrieve webhook history.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookHistoryResponse'
+      tags:
+      - Dev
+components:
+  schemas:
+    WebhookHistoryResponse:
+      type: object
+      properties:
+        Items:
+          type: array
+          description: Array of webhook delivery records.
+          items:
+            $ref: '#/components/schemas/WebhookHistoryItem'
+        nextToken:
+          type: string
+          description: Optional continuation token if there are more results.
+    WebhookHistoryItem:
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+          description: ID of the Subscription linking recipient org to the publisher.
+        contentUrl:
+          type: string
+          description: URL to the content that was updated (e.g. a Time.com URL).
+        deliveryUrl:
+          type: string
+          description: URL that TollBit attempted to send this webhook to.
+        eventType:
+          type: string
+          enum:
+          - CREATE
+          - UPDATE
+          description: Event type (CREATE or UPDATE).
+        lastAttempt:
+          type: string
+          format: date-time
+          description: Timestamp in UTC of the last attempt to send the webhook to deliveryUrl.
+        lastStatus:
+          type: integer
+          description: HTTP status code of the last attempt.
+        numAttempts:
+          type: integer
+          description: Number of delivery attempts.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: TollbitKey
+    ApiKeyAuth_:
+      type: apiKey
+      in: header
+      name: Tollbit-Token
+    TollbitKey:
+      type: apiKey
+      in: header
+      name: TollbitKey
+      description: Your API key which can be found in the access page of the dashboard.
+    SubdomainAccessToken:
+      type: http
+      scheme: Bearer
+      description: 'To access content on a TollBit subdomain, you will need an access token. This token is a JWT that is signed by TollBit and includes information about the subdomain and the permissions granted to the token.
+
+
+        You can obtain the token by calling the TokensService to create a Content Access Token. Once you have the token, you can include it in the Authorization header of your requests to the subdomain.'

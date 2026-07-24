@@ -1,0 +1,206 @@
+openapi: 3.0.0
+info:
+  title: TollBit Auth Tokens Search API
+  version: v2
+  description: 'TollBit is the web stack for the agentic internet: publishers analyze, control, and monetize AI agent access to their content. This API lets developers and AI agents discover licensable content (Licensed Search), fetch rates and license options, mint one-time signed access tokens, retrieve licensed or indexed content, self-report usage, and list a property''s content catalog. Reconstructed by API Evangelist from TollBit''s published per-operation OpenAPI fragments (docs.tollbit.com/reference).'
+  contact:
+    name: TollBit
+    email: team@tollbit.com
+    url: https://tollbit.com
+  x-apievangelist:
+    generated: '2026-07-21'
+    method: searched
+    source: https://docs.tollbit.com/reference (per-operation OpenAPI fragments merged; llms.txt index)
+    note: Reconstructed from TollBit's published per-operation OpenAPI 3.0 fragments. Only real /dev/* and subdomain endpoints included; a foreign ReadMe sample spec present on two reference pages was excluded.
+servers:
+- url: https://gateway.tollbit.com
+  description: Production API gateway
+tags:
+- name: Search
+paths:
+  /dev/v2/search:
+    get:
+      operationId: SearchService_search
+      parameters:
+      - name: q
+        in: query
+        required: true
+        schema:
+          type: string
+        explode: false
+      - name: size
+        in: query
+        required: false
+        description: Number of results to return. Maximum value is 20.
+        schema:
+          type: integer
+          format: int32
+        explode: false
+      - name: next-token
+        in: query
+        required: false
+        description: Token for pagination. If provided, continues from the encoded page. If not provided, returns first page.
+        schema:
+          type: string
+        explode: false
+      - name: properties
+        in: query
+        required: false
+        description: Comma-separated list of domains (max 20) to boost in search results. When provided, generates a custom goggle string.
+        schema:
+          type: string
+        explode: false
+      - name: allowedOnly
+        in: query
+        required: false
+        description: 'When true, restrict search to properties the calling org is allowed to access.
+
+          Intersects with `properties` when both are provided.
+
+          Currently mirrors `readyToLicense`; will be expanded to broader allowlist semantics later.'
+        schema:
+          type: boolean
+        explode: false
+      - name: readyToLicense
+        in: query
+        required: false
+        description: When true, restrict search to properties ready to license (rates-enabled / content-catalog path). Intersects with `properties` when both are provided. Currently equivalent to `allowedOnly`.
+        schema:
+          type: boolean
+        explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagedSearchResultResponse'
+        '400':
+          description: The server could not understand the request due to invalid syntax.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '401':
+          description: Access is unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '403':
+          description: Access is forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '404':
+          description: The server cannot find the requested resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+      tags:
+      - Search
+      security:
+      - ApiKeyAuth: []
+components:
+  schemas:
+    Publisher:
+      type: object
+      required:
+      - domain
+      - name
+      properties:
+        domain:
+          type: string
+        name:
+          type: string
+    SearchResult:
+      type: object
+      required:
+      - title
+      - url
+      - publishedDate
+      - publisher
+      - availability
+      properties:
+        title:
+          type: string
+        url:
+          type: string
+        publishedDate:
+          type: string
+        publisher:
+          $ref: '#/components/schemas/Publisher'
+        availability:
+          $ref: '#/components/schemas/Availability'
+    PagedSearchResultResponse:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - nextToken
+        - items
+        properties:
+          nextToken:
+            type: string
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/SearchResult'
+    Availability:
+      type: object
+      required:
+      - discoverable
+      - readyToLicense
+      properties:
+        discoverable:
+          type: boolean
+        readyToLicense:
+          type: boolean
+    ProblemJSON:
+      type: object
+      required:
+      - type
+      - title
+      - status
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+      additionalProperties: {}
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: TollbitKey
+    ApiKeyAuth_:
+      type: apiKey
+      in: header
+      name: Tollbit-Token
+    TollbitKey:
+      type: apiKey
+      in: header
+      name: TollbitKey
+      description: Your API key which can be found in the access page of the dashboard.
+    SubdomainAccessToken:
+      type: http
+      scheme: Bearer
+      description: 'To access content on a TollBit subdomain, you will need an access token. This token is a JWT that is signed by TollBit and includes information about the subdomain and the permissions granted to the token.
+
+
+        You can obtain the token by calling the TokensService to create a Content Access Token. Once you have the token, you can include it in the Authorization header of your requests to the subdomain.'

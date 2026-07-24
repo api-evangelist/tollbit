@@ -1,0 +1,149 @@
+openapi: 3.0.0
+info:
+  title: TollBit Auth Tokens Get Catalog of Pages for Property API
+  version: v2
+  description: 'TollBit is the web stack for the agentic internet: publishers analyze, control, and monetize AI agent access to their content. This API lets developers and AI agents discover licensable content (Licensed Search), fetch rates and license options, mint one-time signed access tokens, retrieve licensed or indexed content, self-report usage, and list a property''s content catalog. Reconstructed by API Evangelist from TollBit''s published per-operation OpenAPI fragments (docs.tollbit.com/reference).'
+  contact:
+    name: TollBit
+    email: team@tollbit.com
+    url: https://tollbit.com
+  x-apievangelist:
+    generated: '2026-07-21'
+    method: searched
+    source: https://docs.tollbit.com/reference (per-operation OpenAPI fragments merged; llms.txt index)
+    note: Reconstructed from TollBit's published per-operation OpenAPI 3.0 fragments. Only real /dev/* and subdomain endpoints included; a foreign ReadMe sample spec present on two reference pages was excluded.
+servers:
+- url: https://gateway.tollbit.com
+  description: Production API gateway
+tags:
+- name: Get Catalog of Pages for Property
+paths:
+  /dev/v2/content/{propertyDomain}/catalog/list:
+    get:
+      operationId: ContentService_getCatalog
+      parameters:
+      - name: propertyDomain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        explode: false
+      - name: pageToken
+        in: query
+        required: false
+        schema:
+          type: string
+        explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogResponse'
+        '400':
+          description: The server could not understand the request due to invalid syntax.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '401':
+          description: Access is unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '403':
+          description: Access is forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '404':
+          description: The server cannot find the requested resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+      tags:
+      - Get Catalog of Pages for Property
+      security:
+      - ApiKeyAuth: []
+components:
+  schemas:
+    CatalogResponse:
+      type: object
+      required:
+      - pages
+      properties:
+        pageToken:
+          type: string
+        pages:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyPage'
+    PropertyPage:
+      type: object
+      required:
+      - propertyId
+      - pageUrl
+      properties:
+        propertyId:
+          type: string
+        pageUrl:
+          type: string
+        lastMod:
+          type: string
+          format: date-time
+    ProblemJSON:
+      type: object
+      required:
+      - type
+      - title
+      - status
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+      additionalProperties: {}
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: TollbitKey
+    ApiKeyAuth_:
+      type: apiKey
+      in: header
+      name: Tollbit-Token
+    TollbitKey:
+      type: apiKey
+      in: header
+      name: TollbitKey
+      description: Your API key which can be found in the access page of the dashboard.
+    SubdomainAccessToken:
+      type: http
+      scheme: Bearer
+      description: 'To access content on a TollBit subdomain, you will need an access token. This token is a JWT that is signed by TollBit and includes information about the subdomain and the permissions granted to the token.
+
+
+        You can obtain the token by calling the TokensService to create a Content Access Token. Once you have the token, you can include it in the Authorization header of your requests to the subdomain.'

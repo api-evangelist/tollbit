@@ -1,0 +1,466 @@
+openapi: 3.0.0
+info:
+  title: TollBit Auth Tokens Tollbit Content API
+  version: v2
+  description: 'TollBit is the web stack for the agentic internet: publishers analyze, control, and monetize AI agent access to their content. This API lets developers and AI agents discover licensable content (Licensed Search), fetch rates and license options, mint one-time signed access tokens, retrieve licensed or indexed content, self-report usage, and list a property''s content catalog. Reconstructed by API Evangelist from TollBit''s published per-operation OpenAPI fragments (docs.tollbit.com/reference).'
+  contact:
+    name: TollBit
+    email: team@tollbit.com
+    url: https://tollbit.com
+  x-apievangelist:
+    generated: '2026-07-21'
+    method: searched
+    source: https://docs.tollbit.com/reference (per-operation OpenAPI fragments merged; llms.txt index)
+    note: Reconstructed from TollBit's published per-operation OpenAPI 3.0 fragments. Only real /dev/* and subdomain endpoints included; a foreign ReadMe sample spec present on two reference pages was excluded.
+servers:
+- url: https://gateway.tollbit.com
+  description: Production API gateway
+tags:
+- name: Tollbit Content
+paths:
+  /dev/v2/content/{contentUrl}:
+    get:
+      operationId: ContentService_getContent
+      parameters:
+      - name: contentUrl
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetContentResponse'
+        '400':
+          description: The server could not understand the request due to invalid syntax.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '401':
+          description: Access is unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '403':
+          description: Access is forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '404':
+          description: The server cannot find the requested resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+      tags:
+      - Tollbit Content
+      security:
+      - ApiKeyAuth_: []
+  /dev/v2/content/{propertyDomain}/catalog/list:
+    get:
+      operationId: ContentService_getCatalog
+      parameters:
+      - name: propertyDomain
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+        explode: false
+      - name: pageToken
+        in: query
+        required: false
+        schema:
+          type: string
+        explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogResponse'
+        '400':
+          description: The server could not understand the request due to invalid syntax.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '401':
+          description: Access is unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '403':
+          description: Access is forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '404':
+          description: The server cannot find the requested resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+      tags:
+      - Tollbit Content
+      security:
+      - ApiKeyAuth: []
+  /dev/v2/rates/batch:
+    post:
+      operationId: ContentService_batchGetRates
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BatchRateResponseV2'
+        '400':
+          description: The server could not understand the request due to invalid syntax.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '401':
+          description: Access is unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '403':
+          description: Access is forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '404':
+          description: The server cannot find the requested resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+      tags:
+      - Tollbit Content
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGetRateRequest'
+      security:
+      - ApiKeyAuth: []
+  /dev/v2/rates/{contentUrl}:
+    get:
+      operationId: ContentService_getRates
+      parameters:
+      - name: contentUrl
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeveloperRateResponse'
+        '400':
+          description: The server could not understand the request due to invalid syntax.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '401':
+          description: Access is unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '403':
+          description: Access is forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '404':
+          description: The server cannot find the requested resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemJSON'
+      tags:
+      - Tollbit Content
+      security:
+      - ApiKeyAuth: []
+components:
+  schemas:
+    RateLicensePermission:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+    RatePriceResponse:
+      type: object
+      required:
+      - priceMicros
+      - currency
+      properties:
+        priceMicros:
+          type: integer
+          format: int64
+        currency:
+          type: string
+    RateLicenseResponse:
+      type: object
+      required:
+      - id
+      - licenseType
+      - licensePath
+      - permissions
+      properties:
+        id:
+          type: string
+        licenseType:
+          type: string
+        licensePath:
+          type: string
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RateLicensePermission'
+    GetContentResponse:
+      type: object
+      required:
+      - content
+      - metadata
+      properties:
+        content:
+          $ref: '#/components/schemas/PageContent'
+        metadata:
+          $ref: '#/components/schemas/ContentMetadata'
+        rate:
+          $ref: '#/components/schemas/ContentRate'
+    BatchDeveloperRateResponse:
+      type: object
+      required:
+      - price
+      - license
+      - error
+      properties:
+        price:
+          $ref: '#/components/schemas/RatePriceResponse'
+        license:
+          $ref: '#/components/schemas/BatchRateLicenseResponse'
+        error:
+          type: string
+    CatalogResponse:
+      type: object
+      required:
+      - pages
+      properties:
+        pageToken:
+          type: string
+        pages:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyPage'
+    BatchRateResponseV2:
+      type: object
+      required:
+      - url
+      - rates
+      properties:
+        url:
+          type: string
+        rates:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchDeveloperRateResponse'
+    RatePrice:
+      type: object
+      required:
+      - priceMicros
+      - currency
+      properties:
+        priceMicros:
+          type: integer
+          format: int64
+        currency:
+          type: string
+    ContentRate:
+      type: object
+      required:
+      - price
+      - license
+      properties:
+        price:
+          $ref: '#/components/schemas/RatePrice'
+        license:
+          $ref: '#/components/schemas/RateLicenseResponse'
+    BatchGetRateRequest:
+      type: object
+      required:
+      - urls
+      properties:
+        urls:
+          type: array
+          items:
+            type: string
+    PageContent:
+      type: object
+      required:
+      - header
+      - body
+      - footer
+      properties:
+        header:
+          type: string
+        body:
+          type: string
+        footer:
+          type: string
+    BatchRateLicenseResponse:
+      type: object
+      required:
+      - cuid
+      - licenseType
+      - licensePath
+      - permissions
+      - validUntil
+      properties:
+        cuid:
+          type: string
+        licenseType:
+          type: string
+        licensePath:
+          type: string
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RateLicensePermission'
+        validUntil:
+          type: string
+    PropertyPage:
+      type: object
+      required:
+      - propertyId
+      - pageUrl
+      properties:
+        propertyId:
+          type: string
+        pageUrl:
+          type: string
+        lastMod:
+          type: string
+          format: date-time
+    DeveloperRateResponse:
+      type: object
+      required:
+      - price
+      - license
+      properties:
+        price:
+          $ref: '#/components/schemas/RatePrice'
+        license:
+          $ref: '#/components/schemas/RateLicenseResponse'
+    ContentMetadata:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        imageUrl:
+          type: string
+        author:
+          type: string
+        published:
+          type: string
+        modified:
+          type: string
+    ProblemJSON:
+      type: object
+      required:
+      - type
+      - title
+      - status
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+      additionalProperties: {}
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: TollbitKey
+    ApiKeyAuth_:
+      type: apiKey
+      in: header
+      name: Tollbit-Token
+    TollbitKey:
+      type: apiKey
+      in: header
+      name: TollbitKey
+      description: Your API key which can be found in the access page of the dashboard.
+    SubdomainAccessToken:
+      type: http
+      scheme: Bearer
+      description: 'To access content on a TollBit subdomain, you will need an access token. This token is a JWT that is signed by TollBit and includes information about the subdomain and the permissions granted to the token.
+
+
+        You can obtain the token by calling the TokensService to create a Content Access Token. Once you have the token, you can include it in the Authorization header of your requests to the subdomain.'
