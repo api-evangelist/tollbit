@@ -1,0 +1,47 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/tollbit-openapi.json
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the TollBit API
+  version: 1.0.0
+extends: ../openapi/tollbit-openapi.json
+actions:
+- target: $.info
+  description: Add external documentation and licensing context to the API info.
+  update:
+    x-external-docs:
+      description: TollBit developer documentation
+      url: https://docs.tollbit.com/reference
+    x-license-model:
+      unit: micros
+      conversion: 1 USD = 1,000,000 micros
+      license_types: [ON_DEMAND_LICENSE, ON_DEMAND_FULL_USE_LICENSE, CUSTOM_LICENSE]
+      permissions: [PARTIAL_USE, FULL_USE, CITATION_REQUIRED]
+- target: $
+  description: Advertise the documented content webhook surface (modeled in asyncapi/).
+  update:
+    x-webhooks:
+      contentAvailable:
+        summary: Content created/updated notification pushed to your delivery URL.
+        payload_fields: [sourceCuid, sourceHost, contentUrl, timestamp, notificationType]
+        verification:
+          signature: HMAC-SHA256 (Authorization header)
+          source_ip: 52.22.183.94
+          user_agent: tollbot/1.0
+        asyncapi: ../asyncapi/tollbit-content-events-webhooks.yml
+- target: "$.paths['/dev/v2/transactions/selfReport'].post"
+  description: Flag idempotency support on the self-report operation.
+  update:
+    x-idempotency:
+      field: idempotencyId
+      location: request body
+      purpose: deduplication and safe retries
+- target: "$.components.securitySchemes"
+  description: Document the single-use content token semantics not captured in the raw scheme.
+  update:
+    x-token-semantics:
+      format: JWT (ES256)
+      single_use: true
+      expiry: 5 minutes
+      types: [content, crawl]

@@ -1,0 +1,34 @@
+{
+  "provider": "tollbit",
+  "sources": [
+    "tollbit-auth-tokens-api-openapi.yml",
+    "tollbit-dev-api-openapi.yml",
+    "tollbit-get-catalog-of-pages-for-property-api-openapi.yml",
+    "tollbit-get-tollbit-content-api-openapi.yml",
+    "tollbit-get-tollbit-rates-api-openapi.yml",
+    "tollbit-report-content-usage-api-openapi.yml",
+    "tollbit-reporting-api-openapi.yml",
+    "tollbit-search-api-openapi.yml",
+    "tollbit-search-content-api-openapi.yml",
+    "tollbit-tollbit-content-api-openapi.yml",
+    "tollbit-tollbit-subdomain-api-openapi.yml"
+  ],
+  "outputs": [
+    "tollbit-auth-tokens-api-openapi.yml",
+    "tollbit-dev-api-openapi.yml",
+    "tollbit-get-catalog-of-pages-for-property-api-openapi.yml",
+    "tollbit-get-tollbit-content-api-openapi.yml",
+    "tollbit-get-tollbit-rates-api-openapi.yml",
+    "tollbit-report-content-usage-api-openapi.yml",
+    "tollbit-reporting-api-openapi.yml",
+    "tollbit-search-api-openapi.yml",
+    "tollbit-search-content-api-openapi.yml",
+    "tollbit-tollbit-content-api-openapi.yml",
+    "tollbit-tollbit-subdomain-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

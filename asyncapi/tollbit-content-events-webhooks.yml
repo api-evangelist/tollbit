@@ -1,0 +1,103 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.tollbit.com/docs/webhooks
+asyncapi: 3.0.0
+info:
+  title: TollBit Content Events (Webhooks)
+  version: v1
+  description: >-
+    TollBit pushes real-time webhook notifications to subscriber applications
+    when content becomes available (created or updated) from TollBit publisher
+    properties, so consumers do not have to poll. Delivery history is retrievable
+    via GET /dev/v1/webhook/history. Captured by API Evangelist from the
+    published webhooks documentation; TollBit does not publish an AsyncAPI file,
+    so this document models the documented webhook surface.
+  contact:
+    name: TollBit
+    url: https://tollbit.com
+defaultContentType: application/json
+servers:
+  subscriber:
+    host: your-app.example.com
+    protocol: https
+    description: >-
+      Your registered webhook (delivery) endpoint. TollBit POSTs events to it
+      from NAT gateway IP 52.22.183.94 with User-Agent `tollbot/1.0`.
+channels:
+  contentAvailable:
+    address: '{deliveryUrl}'
+    description: The subscriber-supplied HTTPS endpoint that receives content events.
+    parameters:
+      deliveryUrl:
+        description: The URL you registered for the subscription.
+    messages:
+      ContentNotification:
+        $ref: '#/components/messages/ContentNotification'
+operations:
+  receiveContentNotification:
+    action: receive
+    channel:
+      $ref: '#/channels/contentAvailable'
+    summary: Receive a content-available notification from TollBit.
+    messages:
+    - $ref: '#/components/messages/ContentNotification'
+components:
+  messages:
+    ContentNotification:
+      name: ContentNotification
+      title: Content Available Notification
+      summary: Emitted when publisher content is created or updated.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          Authorization:
+            type: string
+            description: HMAC-SHA256 signature computed over the webhook URL, keyed by the subscription Signing Secret.
+          User-Agent:
+            type: string
+            const: tollbot/1.0
+      payload:
+        $ref: '#/components/schemas/ContentNotificationPayload'
+  schemas:
+    ContentNotificationPayload:
+      type: object
+      required:
+      - sourceCuid
+      - sourceHost
+      - contentUrl
+      - timestamp
+      - notificationType
+      properties:
+        sourceCuid:
+          type: string
+          description: Account identifier for the property.
+        sourceHost:
+          type: string
+          description: Domain host of the content.
+        contentUrl:
+          type: string
+          description: The specific page URL for the content.
+        timestamp:
+          type: string
+          format: date-time
+          description: UTC timestamp (ISO 8601) of when content was appended.
+        notificationType:
+          type: string
+          enum:
+          - CREATED
+          - UPDATED
+      example:
+        sourceCuid: rd4mezz10lifxlk90d9nd38p
+        sourceHost: pioneervalleygazette.com
+        contentUrl: https://pioneervalleygazette.com/article/bubble-fairy
+        timestamp: '2025-09-30T23:08:40.620435262Z'
+        notificationType: CREATED
+x-webhook-verification:
+  ip_allowlist:
+  - 52.22.183.94
+  signature: HMAC-SHA256 (Authorization header)
+  user_agent: tollbot/1.0
+x-delivery-history:
+  endpoint: GET https://gateway.tollbit.com/dev/v1/webhook/history
+  auth: TollbitKey header

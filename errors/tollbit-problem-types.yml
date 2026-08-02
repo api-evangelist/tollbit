@@ -1,0 +1,63 @@
+generated: '2026-07-21'
+method: derived
+source: >-
+  openapi/tollbit-openapi.json (ProblemJSON 4xx/5xx responses) enriched from
+  docs.tollbit.com (tokens, rates, content, webhooks error sections)
+format: rfc9457
+media_type: application/json
+envelope:
+  schema: ProblemJSON
+  fields:
+    type: A URI reference identifying the problem type (often `about:blank`).
+    title: Short, human-readable summary of the problem type.
+    status: HTTP status code (integer).
+    detail: Human-readable explanation specific to this occurrence.
+    instance: URI reference of the specific occurrence (e.g. `/dev/v2/tokens/content`).
+example:
+  detail: "The license..."
+  instance: /dev/v2/tokens/content
+  status: 400
+  title: Bad Request
+  type: about:blank
+problem_types:
+- status: 400
+  title: Bad Request
+  meaning: >-
+    The server could not understand the request due to invalid syntax, invalid
+    parameters, an unavailable/invalid license, or access not allowed for the
+    requested URL.
+  remediation: >-
+    Validate request body and parameters; confirm the license type is available
+    for the content and that maxPriceMicros covers the rate.
+  seen_on:
+  - POST /dev/v2/tokens/content
+  - POST /dev/v2/tokens/crawl
+  - GET /dev/v2/rates/{contentUrl}
+  - POST /dev/v2/rates/batch
+  - GET /dev/v2/content/{contentUrl}
+- status: 401
+  title: Unauthorized
+  meaning: Missing or invalid `TollbitKey` header, or invalid/missing access token.
+  remediation: Supply a valid API key from the Developer Dashboard, or mint a fresh single-use token.
+  seen_on:
+  - all /dev/* endpoints
+- status: 403
+  title: Forbidden
+  meaning: Access is forbidden for the authenticated principal.
+  remediation: Confirm your organization is permitted to access the property/content.
+  seen_on:
+  - GET /dev/v2/search
+  - POST /dev/v2/tokens/*
+- status: 404
+  title: Not Found
+  meaning: The server cannot find the requested resource.
+  remediation: Verify the content URL / property domain exists and is registered with TollBit.
+  seen_on:
+  - GET /dev/v2/search
+  - POST /dev/v2/tokens/*
+- status: 500
+  title: Internal Server Error
+  meaning: Server-side error.
+  remediation: Retry with backoff; contact TollBit support if persistent.
+  seen_on:
+  - all /dev/* endpoints

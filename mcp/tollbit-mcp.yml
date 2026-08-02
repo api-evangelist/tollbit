@@ -1,0 +1,39 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  github.com/tollbit/tollbit-mcp-toolbox, npm @tollbit/mcp-toolbox, and the
+  "Access Methods" docs (docs.tollbit.com/docs/other-access-methods)
+status: published
+name: TollBit MCP Toolbox
+description: >-
+  TollBit ships an official Model Context Protocol server ("MCP Toolbox") that
+  connects AI agents to TollBit's dynamic toolbox — licensed search and
+  authorized content access across TollBit publisher properties. It is one of
+  TollBit's publisher "Access Methods" (alongside NLWeb and Agent2Agent),
+  letting a website expose an agent-ready MCP endpoint. A streamable-HTTP shim
+  is published for hosting the stdio server over HTTP.
+servers:
+- name: tollbit-mcp-toolbox
+  transport: stdio
+  package: '@tollbit/mcp-toolbox'
+  registry: https://www.npmjs.com/package/@tollbit/mcp-toolbox
+  repository: https://github.com/tollbit/tollbit-mcp-toolbox
+  install: npx @tollbit/mcp-toolbox
+  official: true
+- name: mcp-streamable-http-shim
+  transport: streamable-http
+  package: '@tollbit/mcp-streamable-http-shim'
+  repository: https://github.com/tollbit/mcp-streamable-http-shim
+  description: Maps a streamable-HTTP MCP server to stdio.
+  official: true
+docs: https://docs.tollbit.com/docs/other-access-methods
+notes: >-
+  The toolbox is "dynamic" — its exposed tools are provisioned per organization
+  and publisher rather than a fixed static list, so a canonical tool manifest is
+  not published. The underlying capabilities map to the TollBit developer API:
+  Licensed Search, Get Rates, Create Access Token, and Get Content.
+capability_surface:
+- search licensable content across TollBit publishers
+- retrieve rates and license options for a URL
+- mint one-time content/crawl access tokens
+- fetch licensed or indexed content as markdown/html

@@ -1,0 +1,40 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  docs.tollbit.com (tokens, security, platform-architecture) +
+  openapi/tollbit-openapi.json + host probes
+description: >-
+  Versioning, token, and operational lifecycle facts for the TollBit developer
+  API. Where a policy was probed but not published, that is recorded as an
+  honest negative (no canonical StatusPage / Deprecation pointer is emitted).
+versioning:
+  style: path
+  current: /dev/v2
+  legacy: /dev/v1 (webhook history)
+  policy_published: false
+deprecation:
+  policy_published: false
+  sunset_header: not documented
+  note: >-
+    No deprecation or Sunset/Deprecation header policy (RFC 8594) is published.
+    No StatusPage/Deprecation pointer emitted.
+tokens:
+  expiry: 5 minutes after issuance
+  single_use: true
+status_page:
+  present: false
+  probed:
+  - url: https://status.tollbit.com
+    result: DNS does not resolve
+  - url: https://tollbit.instatus.com
+    result: 200 but generic Instatus placeholder ("Get ready for downtime"); summary.json 500 — not a claimed page
+  - url: https://tollbit.statuspage.io
+    result: redirects to atlassian.com (unclaimed)
+sla:
+  published: false
+operational:
+  analytics_delay: >-
+    ~24 hours between raw log receipt and analytics appearing in the dashboard
+    (batch aggregation into BigQuery); dashboards reflect the previous full day.
+tls:
+  gateway.tollbit.com: TLSv1.3, cert expires Nov 24 2026

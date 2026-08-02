@@ -1,0 +1,71 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/tollbit-openapi.json
+docs: https://docs.tollbit.com/docs/quickstart
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+  overview: >-
+    TollBit uses two layers of auth. Management/discovery calls (search, rates,
+    tokens, catalog, self-report, webhook history) authenticate with an
+    organization API key in the `TollbitKey` header (obtained from the Access
+    page of the Developer Dashboard at hack.tollbit.com). Actual content
+    retrieval never uses the API key directly: you first mint a cryptographically
+    signed, single-use JWT via the Tokens API, then pass it in the `TollbitToken`
+    header (over the gateway) or as a `Bearer` token in the `Authorization`
+    header (against a publisher `tollbit.<domain>` subdomain), along with a
+    `User-Agent` that contains your registered AgentID. Tokens expire 5 minutes
+    after issuance and are invalidated on first use to defend against replay and
+    man-in-the-middle attacks.
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: TollbitKey
+  description: >-
+    Organization secret API key from the Developer Dashboard Access page. Used
+    on management endpoints (tokens, rates, search, catalog, self-report,
+    webhook history). Never send the API key to a publisher `tollbit.*`
+    subdomain.
+  sources:
+  - openapi/tollbit-openapi.json
+  - https://docs.tollbit.com/docs/quickstart
+- name: ApiKeyAuth_
+  type: apiKey
+  in: header
+  parameter: Tollbit-Token
+  description: >-
+    One-time, cryptographically signed JWT (also referenced as `TollbitToken`)
+    minted from the Tokens API and presented on the Get Content endpoint,
+    paired with a `User-Agent` carrying your AgentID. Single-use; 5-minute
+    expiry.
+  sources:
+  - openapi/tollbit-openapi.json
+  - https://docs.tollbit.com/docs/content
+- name: SubdomainAccessToken
+  type: http
+  scheme: Bearer
+  description: >-
+    Bearer JWT signed by TollBit, scoped to a specific publisher subdomain and
+    the permissions granted. Obtained via the TokensService Create Content
+    Access Token call, then sent in the `Authorization` header when fetching
+    content directly from a `tollbit.<domain>` front door.
+  sources:
+  - openapi/tollbit-openapi.json
+  - https://docs.tollbit.com/docs/quickstart
+tokens:
+  format: JWT
+  signing: 'ECDSA / ES256 (example header alg=ES256)'
+  single_use: true
+  expiry: 5 minutes after issuance
+  types:
+  - content
+  - crawl
+  claims_note: >-
+    Standard JWT claims (iss/sub/aud/exp/nbf/iat/jti) plus token type `tt`
+    (content|crawl) and an `x` extras container binding user agent (`x.ua`) and,
+    for content tokens, max price micros (`x.mpm`), currency (`x.cur`), license
+    type (`x.lt`), and license id (`x.lid`).

@@ -1,0 +1,83 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  docs.tollbit.com (quickstart, tokens, rates, content, webhooks) +
+  openapi/tollbit-openapi.json
+description: >-
+  Cross-cutting runtime semantics for the TollBit developer API (base
+  https://gateway.tollbit.com, path-versioned under /dev/v2).
+auth:
+  style: API key in `TollbitKey` header for management calls; single-use signed
+    JWT (`TollbitToken` header, or `Bearer` Authorization on subdomains) plus an
+    AgentID-bearing `User-Agent` for content retrieval.
+  see: authentication/tollbit-authentication.yml
+idempotency:
+  supported: true
+  mechanism: request-body field
+  field: idempotencyId
+  scope: Self-Report Usage (POST /dev/v2/transactions/selfReport)
+  behavior: >-
+    Callers generate a unique `idempotencyId` per usage-reporting transaction
+    block; TollBit uses it for deduplication and safe retries so repeated
+    submissions are not double-counted. The Python SDK models this as an
+    idempotent "transaction block".
+  token_replay_note: >-
+    Separately, content access tokens carry a JWT `jti` used for anti-replay
+    and are single-use (invalidated on first use).
+pagination:
+  styles:
+  - style: cursor
+    params:
+      cursor: next-token
+      size: size
+    response_fields:
+    - nextToken
+    used_by:
+    - GET /dev/v2/search (size max 20)
+    - GET /dev/v1/webhook/history (size default 25, max 1000)
+  - style: cursor
+    params:
+      cursor: pageToken
+      size: pageSize
+    response_fields:
+    - pageToken
+    used_by:
+    - GET /dev/v2/content/{propertyDomain}/catalog/list
+versioning:
+  style: path
+  current: /dev/v2
+  also: /dev/v1 (webhook history)
+error_envelope:
+  shape: rfc9457-like
+  media_type: application/json
+  fields:
+  - type
+  - title
+  - status
+  - detail
+  - instance
+  note: >-
+    `type` is often `about:blank`. Not served as application/problem+json in the
+    published examples, but follows the RFC 9457 Problem Details field shape.
+  see: errors/tollbit-problem-types.yml
+content_negotiation:
+  header: Tollbit-Accept-Content
+  values:
+  - text/markdown
+  - text/html
+  default: text/markdown
+money:
+  unit: micros
+  conversion: 1 USD = 1,000,000 micros
+  currency_supported:
+  - USD
+rate_limit_signaling:
+  documented: false
+  note: No published rate-limit headers or quota documentation found.
+request_id_tracing:
+  documented: false
+webhook_verification:
+  signature: HMAC-SHA256 in the `Authorization` header (key = subscription Signing Secret)
+  source_ip: 52.22.183.94
+  user_agent: tollbot/1.0
+  see: asyncapi/tollbit-content-events-webhooks.yml

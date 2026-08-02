@@ -1,0 +1,66 @@
+generated: '2026-07-21'
+method: derived
+source: >-
+  openapi/tollbit-openapi.json + docs.tollbit.com (tokens, content, webhooks,
+  security)
+description: >-
+  Assertions about which cross-cutting industry standards the TollBit developer
+  API conforms to. Derived from the reconstructed OpenAPI and published docs;
+  each entry records evidence. Absence of a claim is honest (not fabricated).
+standards:
+- id: rfc9457
+  name: Problem Details for HTTP APIs
+  conforms: true
+  evidence: >-
+    All 4xx/5xx responses use a ProblemJSON schema with type/title/status/detail/
+    instance fields matching RFC 9457. Served as application/json (not
+    application/problem+json), so field-shape conformant but not media-type
+    conformant.
+- id: rfc7519
+  name: JSON Web Token (JWT)
+  conforms: true
+  evidence: >-
+    Access tokens are JWTs with standard iss/sub/aud/exp/nbf/iat/jti claims plus
+    custom tt/x claims; documented in docs.tollbit.com/docs/tokens.
+- id: rfc7515
+  name: JSON Web Signature (JWS)
+  conforms: true
+  evidence: Tokens are cryptographically signed (example alg ES256).
+- id: oauth2
+  name: OAuth 2.0
+  conforms: false
+  evidence: >-
+    No OAuth 2.0 authorization/token endpoints or scopes are defined. Management
+    auth is a static API key; content auth is a proprietary signed single-use
+    JWT. (The Go CLI references an internal auth service that mints agent-identity
+    tokens, but no public OAuth 2.0 metadata is published.)
+- id: openidconnect
+  name: OpenID Connect
+  conforms: false
+  evidence: No /.well-known/openid-configuration (404).
+- id: pagination
+  name: Cursor pagination
+  conforms: true
+  evidence: >-
+    Cursor-based pagination via next-token/size (search, webhook history) and
+    pageToken/pageSize (catalog).
+- id: idempotency
+  name: Idempotent writes
+  conforms: true
+  evidence: >-
+    Self-Report Usage accepts a client-supplied `idempotencyId` for dedup and
+    safe retries.
+- id: webhooks
+  name: HMAC-signed webhooks
+  conforms: true
+  evidence: >-
+    Content webhooks are signed with HMAC-SHA256 in the Authorization header and
+    originate from a fixed IP with User-Agent tollbot/1.0.
+- id: json_api
+  name: JSON:API
+  conforms: false
+  evidence: Responses are plain JSON, not JSON:API media type or envelope.
+- id: fhir
+  name: HL7 FHIR
+  conforms: false
+  evidence: Not a healthcare API.

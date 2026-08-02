@@ -1,0 +1,30 @@
+generated: '2026-07-21'
+method: searched
+source: npm @tollbit/* organization packages
+description: >-
+  TollBit publishes client-side / embeddable UI components distinct from its
+  SDKs — a shared component library for its customer-facing products, an
+  embeddable "Magic Search" experience, and an integrate-tile component. These
+  are drop-in surfaces for publishers and integrators rather than API clients.
+families:
+- family: UI Component Library
+  components:
+  - name: '@tollbit/ui'
+    version: 0.0.4
+    registry: https://www.npmjs.com/package/@tollbit/ui
+    description: Component library for all customer-facing TollBit products.
+- family: Search Experience
+  components:
+  - name: '@tollbit/magic-search'
+    registry: https://www.npmjs.com/package/@tollbit/magic-search
+    description: Scripts to create the TollBit Magic Search experience for a site.
+- family: Integration Tiles
+  components:
+  - name: '@tollbit/core-integrate-tile'
+    registry: https://www.npmjs.com/package/@tollbit/core-integrate-tile
+    description: Embeddable integrate-tile component.
+loaders:
+- npm / bundler import of the @tollbit/* packages
+notes: >-
+  Agent-framework plugins (@tollbit/playwright, @tollbit/stagehand) are tracked
+  in packages/ as agent-plugins, not here.

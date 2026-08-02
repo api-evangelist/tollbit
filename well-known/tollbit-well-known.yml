@@ -1,0 +1,34 @@
+generated: '2026-07-21'
+method: probed
+source: probed /.well-known/* on tollbit.com and docs.tollbit.com
+description: >-
+  Probe of common /.well-known/ discovery documents for TollBit. None are
+  currently published (all 404). Absence is a valid, expected result and is
+  recorded here for auditability; no WellKnown or SecurityTxt pointer is emitted
+  in apis.yml because nothing was found.
+probes:
+- host: tollbit.com
+  path: /.well-known/security.txt
+  status: 404
+  file: null
+- host: tollbit.com
+  path: /.well-known/openid-configuration
+  status: 404
+  file: null
+- host: tollbit.com
+  path: /.well-known/oauth-authorization-server
+  status: 404
+  file: null
+- host: tollbit.com
+  path: /.well-known/api-catalog
+  status: 404
+  file: null
+- host: tollbit.com
+  path: /.well-known/ai-plugin.json
+  status: 404
+  file: null
+- host: docs.tollbit.com
+  path: /.well-known/security.txt
+  status: 404
+  file: null
+found: []

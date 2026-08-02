@@ -1,0 +1,71 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  github.com/tollbit/cli (README, main) + npm @tollbit/tollbit-cli +
+  GitHub Releases
+name: TollBit CLI
+binary: tollbit
+language: Go
+description: >-
+  First-party TollBit command-line client for searching and grounding publisher
+  content for AI agents, with access to all content in the TollBit network.
+  Primary workflow is install -> search -> content pricing -> content fetch, with
+  authentication triggered automatically when a token is required. Ships a
+  bundled Agent Skill that `tollbit guide --install <dir>` writes as
+  `<dir>/tollbit-cli/SKILL.md`.
+repository: https://github.com/tollbit/cli
+releases: https://github.com/tollbit/cli/releases
+gateway_base: https://gateway.tollbit.com
+install:
+- method: shell
+  command: 'curl -fsSL https://raw.githubusercontent.com/tollbit/cli/main/scripts/install.sh | bash'
+  platforms: [macOS, Linux]
+  default_dir: ~/.local/bin
+- method: powershell
+  command: 'irm https://raw.githubusercontent.com/tollbit/cli/main/scripts/install.ps1 | iex'
+  platforms: [Windows]
+- method: npm
+  command: npm install -g @tollbit/tollbit-cli
+  note: Downloads the native binary for your OS.
+- method: source
+  command: go build ./cmd/tollbit
+commands:
+- command: search
+  purpose: Search publisher content via the gateway API.
+  flags: [--size, --json, --properties, --programmatic-only, --user-agent]
+  example: tollbit search "climate policy" --size 10 --json
+- command: content pricing
+  purpose: Price licensed publisher content (single or comma-separated URLs).
+  flags: [--json]
+  example: tollbit content pricing https://example.com/article --json
+- command: content fetch
+  purpose: Fetch licensed publisher content (charges money; requires --confirm in automation).
+  flags: [--confirm, --toDisk, --json, --rate-index, --user-agent]
+  example: tollbit content fetch https://example.com/article --confirm --toDisk ./article.md
+- command: auth
+  subcommands: [login, logout, status, set]
+  purpose: Agent profile and authorization token management (runs automatically when needed).
+  example: tollbit auth status --check
+- command: guide
+  purpose: Print the agent guide; optionally install the bundled Agent Skill markdown.
+  example: tollbit guide --install ~/.claude/skills
+- command: version
+  purpose: Print the CLI version string.
+conventions:
+  json_output: '--json on search, content pricing, content fetch, auth status'
+  exit_codes:
+    '0': success
+    '1': runtime error
+    '2': usage error
+  streams: stdout is data-only; hints and errors on stderr
+env:
+- TOLLBIT_AGENT_DEFAULT_NAME
+- TOLLBIT_AGENT_DEFAULT_USER_AGENT
+- TOLLBIT_AUTH_BASE_URL
+- TOLLBIT_CREDENTIALS_STORAGE_DIR
+- TOLLBIT_AUTH_BROWSER_CONSENT_AUTO_OPEN_BROWSER
+bundled_skill:
+  name: tollbit-cli
+  install: tollbit guide --install <SKILLS_DIR>
+  writes: <SKILLS_DIR>/tollbit-cli/SKILL.md
+notes: The binary is also tracked in packages/ (@tollbit/tollbit-cli + the Go repo).

@@ -1,0 +1,105 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  npm registry search (@tollbit/*), PyPI (tollbit-python-sdk), and the
+  github.com/tollbit organization
+description: >-
+  First-party TollBit client libraries and tooling. TollBit ships an official
+  Python SDK and Node SDK for the developer API, a native CLI (Go binary + npm
+  wrapper), an MCP toolbox server, an embeddable UI component library, and
+  agent-framework plugins for Playwright and Stagehand.
+registries:
+  npm_org: 'https://www.npmjs.com/org/tollbit'
+  pypi: 'https://pypi.org/project/tollbit-python-sdk/'
+  github_org: 'https://github.com/tollbit'
+packages:
+- name: tollbit-python-sdk
+  ecosystem: pypi
+  official: true
+  language: Python
+  latest: 0.5.4
+  license: MIT
+  import: tollbit
+  requires: '>=3.10,<4.0'
+  install: pip install tollbit-python-sdk
+  registry: https://pypi.org/project/tollbit-python-sdk/
+  repository: https://github.com/tollbit/tollbit-python-sdk
+  description: >-
+    Official Python SDK for TollBit services — sync and async clients for
+    Licensed Search, checking rates, minting tokens, retrieving licensed and
+    indexed content, and self-reporting usage.
+- name: '@tollbit/client'
+  ecosystem: npm
+  official: true
+  language: JavaScript
+  latest: 0.1.0
+  install: npm install @tollbit/client
+  registry: https://www.npmjs.com/package/@tollbit/client
+  description: TollBit SDK for usage with Node.
+- name: '@tollbit/tollbit-cli'
+  ecosystem: npm
+  official: true
+  language: JavaScript
+  latest: 0.2.2
+  install: npm install -g @tollbit/tollbit-cli
+  registry: https://www.npmjs.com/package/@tollbit/tollbit-cli
+  repository: https://github.com/tollbit/cli
+  description: Wrapper that installs the native `tollbit` CLI binary (Go).
+  kind: cli
+- name: '@tollbit/mcp-toolbox'
+  ecosystem: npm
+  official: true
+  language: JavaScript
+  latest: 1.0.15
+  install: npm install @tollbit/mcp-toolbox
+  registry: https://www.npmjs.com/package/@tollbit/mcp-toolbox
+  repository: https://github.com/tollbit/tollbit-mcp-toolbox
+  description: Stdio MCP server connecting agents to TollBit's dynamic toolbox.
+  kind: mcp
+- name: '@tollbit/mcp-streamable-http-shim'
+  ecosystem: npm
+  official: true
+  language: JavaScript
+  registry: https://www.npmjs.com/package/@tollbit/mcp-streamable-http-shim
+  repository: https://github.com/tollbit/mcp-streamable-http-shim
+  description: Shim mapping a streamable-HTTP MCP server to stdio.
+  kind: mcp
+- name: '@tollbit/ui'
+  ecosystem: npm
+  official: true
+  language: JavaScript
+  latest: 0.0.4
+  install: npm install @tollbit/ui
+  registry: https://www.npmjs.com/package/@tollbit/ui
+  description: Component library for all customer-facing TollBit products.
+  kind: components
+- name: '@tollbit/magic-search'
+  ecosystem: npm
+  official: true
+  language: JavaScript
+  registry: https://www.npmjs.com/package/@tollbit/magic-search
+  description: Scripts to create the TollBit Magic Search experience for a site.
+  kind: components
+- name: '@tollbit/core-integrate-tile'
+  ecosystem: npm
+  official: true
+  language: JavaScript
+  registry: https://www.npmjs.com/package/@tollbit/core-integrate-tile
+  description: Embeddable integrate-tile component library.
+  kind: components
+- name: '@tollbit/playwright'
+  ecosystem: npm
+  official: true
+  language: JavaScript
+  registry: https://www.npmjs.com/package/@tollbit/playwright
+  description: Plugin-style component to help Playwright agents access TollBit front doors.
+  kind: agent-plugin
+- name: '@tollbit/stagehand'
+  ecosystem: npm
+  official: true
+  language: JavaScript
+  registry: https://www.npmjs.com/package/@tollbit/stagehand
+  description: Plugin-style component to help Stagehand agents access TollBit front doors.
+  kind: agent-plugin
+notes:
+  no_openapi_published: TollBit does not publish a single OpenAPI document; per-operation OpenAPI 3.0 fragments are embedded on each docs.tollbit.com/reference page.

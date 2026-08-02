@@ -1,0 +1,101 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/tollbit-openapi.json + docs.tollbit.com object references
+description: >-
+  Entity-relationship model of the TollBit developer API, derived from OpenAPI
+  schemas and documented response bodies. Money is expressed in micros
+  (1 USD = 1,000,000 micros).
+entities:
+- name: SearchResult
+  description: A discoverable piece of publisher content returned by Licensed Search.
+  fields: [title, url, publishedDate, publisher, availability]
+- name: Publisher
+  description: The property that owns content.
+  fields: [domain, name]
+- name: Availability
+  description: Whether content is discoverable and ready to license.
+  fields: [discoverable, readyToLicense]
+- name: Rate
+  description: A license option and its price for a specific content URL.
+  fields: [license, price]
+- name: License
+  description: A usage grant for a single use of a content page.
+  fields: [id/cuid, licensePath, licenseType, permissions]
+  enums:
+    licenseType: [ON_DEMAND_LICENSE, ON_DEMAND_FULL_USE_LICENSE, CUSTOM_LICENSE]
+    permissions: [PARTIAL_USE, FULL_USE, CITATION_REQUIRED]
+- name: Price
+  description: Monetary amount for a license option.
+  fields: [priceMicros, currency]
+- name: Token
+  description: One-time signed JWT authorizing a content or crawl request.
+  fields: [token]
+  enums:
+    tt: [content, crawl]
+- name: Content
+  description: The retrieved page payload plus metadata and applied rate.
+  fields: [content(header/body/footer), metadata, rate]
+- name: ContentMetadata
+  fields: [author, description, imageUrl, modified, published, title]
+- name: PropertyPage
+  description: An entry in a property's flattened content catalog.
+  fields: [lastMod, pageUrl, propertyId]
+- name: UsageReceipt
+  description: Result of self-reporting usage of a licensed URL.
+  fields: [url, perUnitPriceMicros, totalUsePriceMicros, currency, license]
+- name: WebhookDelivery
+  description: A record of a content-notification webhook delivery attempt.
+  fields: [subscriptionId, contentUrl, deliveryUrl, eventType, lastAttempt, lastStatus, numAttempts]
+relationships:
+- from: SearchResult
+  to: Publisher
+  type: belongs_to
+  via: publisher
+- from: SearchResult
+  to: Availability
+  type: has_one
+  via: availability
+- from: Rate
+  to: License
+  type: has_one
+  via: license
+- from: Rate
+  to: Price
+  type: has_one
+  via: price
+- from: License
+  to: Price
+  type: has_one
+  via: price
+- from: Content
+  to: Rate
+  type: has_one
+  via: rate
+- from: Content
+  to: ContentMetadata
+  type: has_one
+  via: metadata
+- from: Token
+  to: License
+  type: references
+  via: 'x.lid (license id claim)'
+- from: Token
+  to: Content
+  type: authorizes
+  via: 'aud (target URL)'
+- from: UsageReceipt
+  to: License
+  type: references
+  via: license.cuid
+- from: PropertyPage
+  to: Publisher
+  type: belongs_to
+  via: propertyId
+- from: WebhookDelivery
+  to: Content
+  type: references
+  via: contentUrl
+id_conventions:
+  license_id: 24-char lowercase base36-like cuid (e.g. nl1sqiauvujk8i6u507wy2mi)
+  property_cuid: cuid (e.g. rd4mezz10lifxlk90d9nd38p)
+  subscription_id: 'sub_ prefix (e.g. sub_abc123)'

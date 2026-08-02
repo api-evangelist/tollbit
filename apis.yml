@@ -1,23 +1,312 @@
 aid: tollbit
 name: Tollbit
-description: Tollbit is a company surfaced as a portfolio company of lightspeed-venture-partners and added
-  to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment
-  pipeline.
+description: >-
+  TollBit is the web stack for the agentic internet, giving publishers and
+  commerce sites the infrastructure to analyze, control, and monetize AI agent
+  access to their content. Publishers verify a property, stream logs for AI-bot
+  analytics, and stand up an "Agent Site" front door (the tollbit.<domain>
+  subdomain) that separates bot traffic from humans and applies content controls,
+  licensing, and usage-based paywalls. Its developer API lets AI agents and
+  builders discover licensable content through Licensed Search, fetch rates and
+  license options, mint cryptographically signed one-time access tokens, retrieve
+  licensed or indexed content as markdown or HTML, self-report usage, and receive
+  webhook notifications when content changes. TollBit ships official Python and
+  Node SDKs, a native CLI with a bundled Agent Skill, an MCP toolbox server, and
+  additional agent access methods (NLWeb, Agent2Agent). Added to the API
+  Evangelist network as a portfolio company of Lightspeed Venture Partners and
+  enriched from its public developer surface.
 url: https://raw.githubusercontent.com/api-evangelist/tollbit/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://avatars.githubusercontent.com/u/159727288?v=4
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - lightspeed-venture-partners
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: enriched
+x-tier-reason: portfolio-lead-enriched
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-apis: []
+- Content Licensing
+- Content Monetization
+- AI Agents
+- Agentic Web
+- Search
+- Bot Management
+- Web Infrastructure
+- Developer API
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: tollbit:tollbit-auth-tokens-api
+  name: Tollbit Auth Tokens API
+  description: The Auth Tokens API from Tollbit — 3 operation(s) for auth tokens.
+  humanURL: https://docs.tollbit.com/reference
+  baseURL: https://gateway.tollbit.com
+  tags:
+  - Auth Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/tollbit-auth-tokens-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/tollbit-content-events-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/tollbit-content-events-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/tollbit-problem-types.yml
+  - type: DataModel
+    url: data-model/tollbit-data-model.yml
+- aid: tollbit:tollbit-dev-api
+  name: Tollbit Dev API
+  description: The Dev API from Tollbit — 1 operation(s) for dev.
+  humanURL: https://docs.tollbit.com/reference
+  baseURL: https://gateway.tollbit.com
+  tags:
+  - Dev
+  properties:
+  - type: OpenAPI
+    url: openapi/tollbit-dev-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/tollbit-content-events-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/tollbit-content-events-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/tollbit-problem-types.yml
+  - type: DataModel
+    url: data-model/tollbit-data-model.yml
+- aid: tollbit:tollbit-get-catalog-of-pages-for-property-api
+  name: Tollbit Get Catalog of Pages for Property API
+  description: >-
+    The Get Catalog of Pages for Property API from Tollbit — 1 operation(s) for get catalog of pages for
+    property.
+  humanURL: https://docs.tollbit.com/reference
+  baseURL: https://gateway.tollbit.com
+  tags:
+  - Get Catalog of Pages for Property
+  properties:
+  - type: OpenAPI
+    url: openapi/tollbit-get-catalog-of-pages-for-property-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/tollbit-content-events-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/tollbit-content-events-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/tollbit-problem-types.yml
+  - type: DataModel
+    url: data-model/tollbit-data-model.yml
+- aid: tollbit:tollbit-get-tollbit-content-api
+  name: Tollbit Get Tollbit Content API
+  description: The Get Tollbit Content API from Tollbit — 1 operation(s) for get tollbit content.
+  humanURL: https://docs.tollbit.com/reference
+  baseURL: https://gateway.tollbit.com
+  tags:
+  - Get Tollbit Content
+  properties:
+  - type: OpenAPI
+    url: openapi/tollbit-get-tollbit-content-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/tollbit-content-events-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/tollbit-content-events-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/tollbit-problem-types.yml
+  - type: DataModel
+    url: data-model/tollbit-data-model.yml
+- aid: tollbit:tollbit-get-tollbit-rates-api
+  name: Tollbit Get Tollbit Rates API
+  description: The Get Tollbit Rates API from Tollbit — 2 operation(s) for get tollbit rates.
+  humanURL: https://docs.tollbit.com/reference
+  baseURL: https://gateway.tollbit.com
+  tags:
+  - Get Tollbit Rates
+  properties:
+  - type: OpenAPI
+    url: openapi/tollbit-get-tollbit-rates-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/tollbit-content-events-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/tollbit-content-events-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/tollbit-problem-types.yml
+  - type: DataModel
+    url: data-model/tollbit-data-model.yml
+- aid: tollbit:tollbit-report-content-usage-api
+  name: Tollbit Report Content Usage API
+  description: The Report Content Usage API from Tollbit — 1 operation(s) for report content usage.
+  humanURL: https://docs.tollbit.com/reference
+  baseURL: https://gateway.tollbit.com
+  tags:
+  - Report Content Usage
+  properties:
+  - type: OpenAPI
+    url: openapi/tollbit-report-content-usage-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/tollbit-content-events-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/tollbit-content-events-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/tollbit-problem-types.yml
+  - type: DataModel
+    url: data-model/tollbit-data-model.yml
+- aid: tollbit:tollbit-reporting-api
+  name: Tollbit Reporting API
+  description: The Reporting API from Tollbit — 1 operation(s) for reporting.
+  humanURL: https://docs.tollbit.com/reference
+  baseURL: https://gateway.tollbit.com
+  tags:
+  - Reporting
+  properties:
+  - type: OpenAPI
+    url: openapi/tollbit-reporting-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/tollbit-content-events-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/tollbit-content-events-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/tollbit-problem-types.yml
+  - type: DataModel
+    url: data-model/tollbit-data-model.yml
+- aid: tollbit:tollbit-search-api
+  name: Tollbit Search API
+  description: The Search API from Tollbit — 1 operation(s) for search.
+  humanURL: https://docs.tollbit.com/reference
+  baseURL: https://gateway.tollbit.com
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/tollbit-search-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/tollbit-content-events-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/tollbit-content-events-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/tollbit-problem-types.yml
+  - type: DataModel
+    url: data-model/tollbit-data-model.yml
+- aid: tollbit:tollbit-search-content-api
+  name: Tollbit Search Content API
+  description: The Search Content API from Tollbit — 1 operation(s) for search content.
+  humanURL: https://docs.tollbit.com/reference
+  baseURL: https://gateway.tollbit.com
+  tags:
+  - Search Content
+  properties:
+  - type: OpenAPI
+    url: openapi/tollbit-search-content-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/tollbit-content-events-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/tollbit-content-events-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/tollbit-problem-types.yml
+  - type: DataModel
+    url: data-model/tollbit-data-model.yml
+- aid: tollbit:tollbit-tollbit-content-api
+  name: Tollbit Tollbit Content API
+  description: The Tollbit Content API from Tollbit — 4 operation(s) for tollbit content.
+  humanURL: https://docs.tollbit.com/reference
+  baseURL: https://gateway.tollbit.com
+  tags:
+  - Tollbit Content
+  properties:
+  - type: OpenAPI
+    url: openapi/tollbit-tollbit-content-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/tollbit-content-events-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/tollbit-content-events-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/tollbit-problem-types.yml
+  - type: DataModel
+    url: data-model/tollbit-data-model.yml
+- aid: tollbit:tollbit-tollbit-subdomain-api
+  name: Tollbit Tollbit Subdomain API
+  description: The Tollbit Subdomain API from Tollbit — 1 operation(s) for tollbit subdomain.
+  humanURL: https://docs.tollbit.com/reference
+  baseURL: https://gateway.tollbit.com
+  tags:
+  - Tollbit Subdomain
+  properties:
+  - type: OpenAPI
+    url: openapi/tollbit-tollbit-subdomain-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/tollbit-content-events-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/tollbit-content-events-webhooks.yml
+  - type: ErrorCatalog
+    url: errors/tollbit-problem-types.yml
+  - type: DataModel
+    url: data-model/tollbit-data-model.yml
+common:
+- type: DomainSecurity
+  url: security/tollbit-domain-security.yml
+- type: Authentication
+  url: authentication/tollbit-authentication.yml
+- type: Packages
+  url: packages/tollbit-packages.yml
+- type: SDKs
+  url: packages/tollbit-packages.yml
+- type: CLI
+  url: cli/tollbit-cli.yml
+- type: MCPServer
+  url: mcp/tollbit-mcp.yml
+- type: LLMsTxt
+  url: llms/tollbit-llms.txt
+- type: Components
+  url: components/tollbit-components.yml
+- type: Conformance
+  url: conformance/tollbit-conformance.yml
+- type: Lifecycle
+  url: lifecycle/tollbit-lifecycle.yml
+- type: Conventions
+  url: conventions/tollbit-conventions.yml
+- type: Idempotency
+  url: conventions/tollbit-conventions.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DeveloperPortal
+  url: https://hack.tollbit.com
+- type: Documentation
+  url: https://docs.tollbit.com
+- type: APIReference
+  url: https://docs.tollbit.com/reference
+- type: GettingStarted
+  url: https://docs.tollbit.com/docs/quickstart
+- type: Support
+  url: https://docs.tollbit.com/docs/feedback-support
+- type: Blog
+  url: https://tollbit.com/blog/
+- type: GitHubOrganization
+  url: https://github.com/tollbit
+- type: SignUp
+  url: https://app.tollbit.com/sign-up
+- type: Login
+  url: https://app.tollbit.com/sign-in
+- type: TermsOfService
+  url: https://tollbit.com/legal/developer-platform-agreement/
+- type: PrivacyPolicy
+  url: https://tollbit.com/privacy-policy/
+- type: Website
+  url: https://tollbit.com
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 20
+  pass: local-v1

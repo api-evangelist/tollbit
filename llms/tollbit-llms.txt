@@ -1,0 +1,58 @@
+# TollBit Documentation
+
+> Documentation for TollBit
+
+## Guides
+- [Getting Started](https://docs.tollbit.com/docs/a-tollbooth-for-your-content.md): Learn how to set up TollBit to analyze, manage, and monetize your content.
+- [Step 1: Verify Property](https://docs.tollbit.com/docs/verifying-a-property.md): Learn how to verify your property before enabling Analytics & Agent Site.
+- [Step 2: Enable Analytics](https://docs.tollbit.com/docs/step-2-enable-analytics.md): Implementation steps to enable logging to TollBit
+- [Step 3: Configure Agent Site](https://docs.tollbit.com/docs/step-3-configure-agent-site.md): Steps to configure agent site within TollBit dashboard and upstream configurations
+- [Integrations](https://docs.tollbit.com/docs/integrations.md): Technical documents on how to configure Analytics and Agent Site by integration type.
+- [General Route](https://docs.tollbit.com/docs/other.md): Learn how to integrate TollBit Analytics and Agent Site without a listed integration.
+- [Akamai](https://docs.tollbit.com/docs/akamai.md): Learn how to integrate TollBit with Akamai.
+- [Arc XP](https://docs.tollbit.com/docs/arc-xp.md): Learn how to integrate TollBit with Arc XP.
+- [AWS (S3, CloudFront, ALB)](https://docs.tollbit.com/docs/aws-s3-cloudfront-alb.md): Learn how to implementate TollBit with Amazon S3, ALB, and/or CloudFront.
+- [CloudFlare](https://docs.tollbit.com/docs/cloudflare.md): Learn how to integrate TollBit with CloudFlare.
+- [Datadome](https://docs.tollbit.com/docs/datadome.md): Learn how to integrate TollBit with Datadome.
+- [Fastly](https://docs.tollbit.com/docs/fastly.md): Learn how to integrate TollBit with Fastly.
+- [Google (GCP, CDN)](https://docs.tollbit.com/docs/google.md): Learn how to integrate TollBit with Google.
+- [Microsoft (Azure, Front Door)](https://docs.tollbit.com/docs/azure.md): Learn how to integrate TollBit with Microsoft.
+- [Vercel](https://docs.tollbit.com/docs/vercel.md): Learn how to integrate TollBit with Vercel.
+- [WordPress VIP](https://docs.tollbit.com/docs/wordpress-vip.md): Learn how to integrate TollBit with WordPress VIP.
+- [Imperva](https://docs.tollbit.com/docs/imperva.md): Learn how to integrate TollBit with Imperva.
+- [Agent Sites](https://docs.tollbit.com/docs/agent-site.md): Learn the features and controls behind Agent Site
+- [Default Settings](https://docs.tollbit.com/docs/content-formatting-1.md): Default configurations for Agent Sites when you redirect traffic.
+- [Enabling Open Access](https://docs.tollbit.com/docs/content-cache.md): Choose whether or not you'd like to provide free or paywalled access to your content.
+- [Enabling Monetization](https://docs.tollbit.com/docs/setting-rates.md): Introduction to rate types and how to activate them on TollBit
+- [Content Controls](https://docs.tollbit.com/docs/content-controls.md): Control what data to include or exclude when developers request content from your website through TollBit.
+- [Access Methods](https://docs.tollbit.com/docs/other-access-methods.md): Learn how to enable NLWeb, MCP, and Agent2Agent protocols for your website.
+- [FAQs](https://docs.tollbit.com/docs/faqs.md): Commonly asked questions about the TollBit platform.
+- [Architecture](https://docs.tollbit.com/docs/platform-architecture.md): Questions about subdomains, CDNs, analytics, and how TollBit works.
+- [Security](https://docs.tollbit.com/docs/security.md): Questions about PII handling, authentication, and security measures.
+- [Feedback / Support](https://docs.tollbit.com/docs/feedback-support.md)
+- [Analytics](https://docs.tollbit.com/docs/log-ingestion.md): Frequently Asked Questions about Log Ingestion & Analytics
+- [Agent Site](https://docs.tollbit.com/docs/bot-management.md): Questions about bot detection, identification, and management with TollBit Agent Site
+- [Admin](https://docs.tollbit.com/docs/admin.md): Manage your organization, invite members, and configure payment settings.
+- [Introduction](https://docs.tollbit.com/docs/introduction.md): A high level overview of TollBit and what it is.
+- [Quickstart](https://docs.tollbit.com/docs/quickstart.md): This guide will get you all set up and ready to use the TollBit API. We'll cover how to get started with an API client and how to make your first API request.
+- [Developer Dashboard Overview](https://docs.tollbit.com/docs/dev-overview.md): Detailed dive into the entire Developer Dashboard and what pages mean.
+- [Response Formatting](https://docs.tollbit.com/docs/content-formatting.md): Dive into the formatting of content as it comes from TollBit.
+- [Licensed Search](https://docs.tollbit.com/docs/licensed-search.md): Search for content across the web and discover licensable content through TollBit.
+- [Search to Content Workflow](https://docs.tollbit.com/docs/search-to-content.md): Complete workflow guide for searching content, checking rates, and retrieving content using the Tollbit API with cURL or Python SDK.
+- [Tokens](https://docs.tollbit.com/docs/tokens.md): Generate one-time access tokens for sanctioned content or for indexing/crawl access.
+- [Rates](https://docs.tollbit.com/docs/rates.md): Get rates and license options for content. Single URL or bulk by list of URLs.
+- [Content](https://docs.tollbit.com/docs/content.md): Retrieve content by URL, self-report usage, list content catalog, and index content with tokens.
+- [Webhooks](https://docs.tollbit.com/docs/webhooks.md): Receive real-time notifications when content becomes available from TollBit publishers, and retrieve webhook delivery history.
+
+## API Reference
+- [/dev/v2/tokens/aos](https://docs.tollbit.com/reference/tokensservice_createaosaccesstoken.md)
+- [/dev/v2/tokens/content](https://docs.tollbit.com/reference/tokensservice_createcontentaccesstoken.md)
+- [/dev/v2/tokens/crawl](https://docs.tollbit.com/reference/tokensservice_createcrawlaccesstoken.md)
+- [/dev/v2/content/{contentUrl}](https://docs.tollbit.com/reference/contentservice_getcontent.md)
+- [/dev/v2/content/{propertyDomain}/catalog/list](https://docs.tollbit.com/reference/contentservice_getcatalog.md)
+- [/dev/v2/rates/batch](https://docs.tollbit.com/reference/contentservice_batchgetrates.md)
+- [/dev/v2/rates/{contentUrl}](https://docs.tollbit.com/reference/contentservice_getrates.md)
+- [/dev/v2/search](https://docs.tollbit.com/reference/searchservice_search.md)
+- [/dev/v2/transactions/selfReport](https://docs.tollbit.com/reference/reportingservice_reportcontentusage.md)
+- [Get History](https://docs.tollbit.com/reference/getwebhookhistory.md): Get the history of webhooks within an optional lookback window, including specific content URLs and last attempted delivery time and status.
+- [/{path}](https://docs.tollbit.com/reference/tollbitsubdomain_getcontent.md)
