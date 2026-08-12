@@ -255,6 +255,8 @@ apis:
   - type: DataModel
     url: data-model/tollbit-data-model.yml
 common:
+- type: Overlay
+  url: overlays/tollbit-openapi-overlay.yaml
 - type: DomainSecurity
   url: security/tollbit-domain-security.yml
 - type: Authentication
