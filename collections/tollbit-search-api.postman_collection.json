@@ -1,0 +1,539 @@
+{
+  "item": [
+    {
+      "id": "4898cde2-1854-4d49-8e63-ba94684e5e13",
+      "name": "Search",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b9d65e10-ed2c-4450-93f6-38328433a5e4",
+          "name": "Search Service search",
+          "request": {
+            "name": "Search Service search",
+            "description": {},
+            "url": {
+              "path": [
+                "dev",
+                "v2",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "<integer>",
+                  "description": "Number of results to return. Maximum value is 20."
+                },
+                {
+                  "disabled": false,
+                  "key": "next-token",
+                  "value": "<string>",
+                  "description": "Token for pagination. If provided, continues from the encoded page. If not provided, returns first page."
+                },
+                {
+                  "disabled": false,
+                  "key": "properties",
+                  "value": "<string>",
+                  "description": "Comma-separated list of domains (max 20) to boost in search results. When provided, generates a custom goggle string."
+                },
+                {
+                  "disabled": false,
+                  "key": "allowedOnly",
+                  "value": "<boolean>",
+                  "description": "When true, restrict search to properties the calling org is allowed to access.\nIntersects with `properties` when both are provided.\nCurrently mirrors `readyToLicense`; will be expanded to broader allowlist semantics later."
+                },
+                {
+                  "disabled": false,
+                  "key": "readyToLicense",
+                  "value": "<boolean>",
+                  "description": "When true, restrict search to properties ready to license (rates-enabled / content-catalog path). Intersects with `properties` when both are provided. Currently equivalent to `allowedOnly`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "TollbitKey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6a5ebc1d-7de2-4ed7-b063-1a46090cc183",
+              "name": "The request has succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dev",
+                    "v2",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "next-token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "properties",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allowedOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "readyToLicense",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "TollbitKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"nextToken\": \"string\",\n  \"items\": [\n    {\n      \"title\": \"string\",\n      \"url\": \"string\",\n      \"publishedDate\": \"string\",\n      \"publisher\": {\n        \"domain\": \"string\",\n        \"name\": \"string\"\n      },\n      \"availability\": {\n        \"discoverable\": true,\n        \"readyToLicense\": false\n      }\n    },\n    {\n      \"title\": \"string\",\n      \"url\": \"string\",\n      \"publishedDate\": \"string\",\n      \"publisher\": {\n        \"domain\": \"string\",\n        \"name\": \"string\"\n      },\n      \"availability\": {\n        \"discoverable\": true,\n        \"readyToLicense\": true\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "385b812e-646e-4b22-8b01-b69fa9b3b149",
+              "name": "The server could not understand the request due to invalid syntax.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dev",
+                    "v2",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "next-token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "properties",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allowedOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "readyToLicense",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "TollbitKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7324,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74478e3f-08cd-4d51-950a-fc2641e0fd17",
+              "name": "Access is unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dev",
+                    "v2",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "next-token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "properties",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allowedOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "readyToLicense",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "TollbitKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7324,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c1b6a77-60ba-4bb8-9a5d-7be1cd5b7e35",
+              "name": "Access is forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dev",
+                    "v2",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "next-token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "properties",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allowedOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "readyToLicense",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "TollbitKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7324,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c8e45b3-897d-4559-9103-3a24df490f44",
+              "name": "The server cannot find the requested resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dev",
+                    "v2",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "next-token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "properties",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allowedOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "readyToLicense",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "TollbitKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7324,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "443cb58e-6868-4217-92c3-0a8b2a2cd718",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dev",
+                    "v2",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "next-token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "properties",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allowedOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "readyToLicense",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "TollbitKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 7324,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.tollbit.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e14104ed-7235-4e8f-84cc-804e761c9001",
+    "name": "TollBit Auth Tokens Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "TollBit is the web stack for the agentic internet: publishers analyze, control, and monetize AI agent access to their content. This API lets developers and AI agents discover licensable content (Licensed Search), fetch rates and license options, mint one-time signed access tokens, retrieve licensed or indexed content, self-report usage, and list a property's content catalog. Reconstructed by API Evangelist from TollBit's published per-operation OpenAPI fragments (docs.tollbit.com/reference).\n\nContact Support:\n Name: TollBit\n Email: team@tollbit.com",
+      "type": "text/plain"
+    }
+  }
+}

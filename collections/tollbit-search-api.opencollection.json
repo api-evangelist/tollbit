@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TollBit Auth Tokens Search API",
+    "version": "v2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SearchService_search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.tollbit.com/dev/v2/search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return. Maximum value is 20."
+              },
+              {
+                "name": "next-token",
+                "value": "",
+                "type": "query",
+                "description": "Token for pagination. If provided, continues from the encoded page. If not provided, returns first page."
+              },
+              {
+                "name": "properties",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of domains (max 20) to boost in search results. When provided, generates a custom goggle string."
+              },
+              {
+                "name": "allowedOnly",
+                "value": "",
+                "type": "query",
+                "description": "When true, restrict search to properties the calling org is allowed to access.\nIntersects with `properties` when both are provided.\nCurrently mirrors `readyToLicense`; will be expanded to broader allowlist semantics later."
+              },
+              {
+                "name": "readyToLicense",
+                "value": "",
+                "type": "query",
+                "description": "When true, restrict search to properties ready to license (rates-enabled / content-catalog path). Intersects with `properties` when both are provided. Currently equivalent to `allowedOnly`."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "TollbitKey",
+              "value": "{{TollbitKey}}",
+              "placement": "header"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

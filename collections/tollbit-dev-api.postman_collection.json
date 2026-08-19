@@ -1,0 +1,164 @@
+{
+  "item": [
+    {
+      "id": "ffa5690a-850d-4141-870d-e301ca09589a",
+      "name": "Dev",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a5e7216c-42dd-49d8-817a-170a5f030540",
+          "name": "Get History",
+          "request": {
+            "name": "Get History",
+            "description": {
+              "content": "Get the history of webhooks within an optional lookback window, including\nspecific content URLs and last attempted delivery time and status.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dev",
+                "v1",
+                "webhook",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "next-token",
+                  "value": "<string>",
+                  "description": "Optional pagination token. Response includes a token to retrieve the next page if available."
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "25",
+                  "description": "Number of items per page. Default 25. Max 1000."
+                },
+                {
+                  "disabled": false,
+                  "key": "days-ago",
+                  "value": "<integer>",
+                  "description": "Number of days back from current date to retrieve webhook history."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "TollbitKey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "64cb3c1e-589a-42fe-a5dd-e9f6bfeecfe5",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dev",
+                    "v1",
+                    "webhook",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "next-token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "25"
+                    },
+                    {
+                      "key": "days-ago",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "TollbitKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Items\": [\n    {\n      \"subscriptionId\": \"string\",\n      \"contentUrl\": \"string\",\n      \"deliveryUrl\": \"string\",\n      \"eventType\": \"CREATE\",\n      \"lastAttempt\": \"1976-03-09T21:17:16.378Z\",\n      \"lastStatus\": 8274,\n      \"numAttempts\": 4904\n    },\n    {\n      \"subscriptionId\": \"string\",\n      \"contentUrl\": \"string\",\n      \"deliveryUrl\": \"string\",\n      \"eventType\": \"CREATE\",\n      \"lastAttempt\": \"1971-06-16T03:58:09.908Z\",\n      \"lastStatus\": 7678,\n      \"numAttempts\": 4075\n    }\n  ],\n  \"nextToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.tollbit.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "60f4a5bc-f9f6-4ccf-820f-b74349d72ee3",
+    "name": "TollBit Auth Tokens Dev API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "TollBit is the web stack for the agentic internet: publishers analyze, control, and monetize AI agent access to their content. This API lets developers and AI agents discover licensable content (Licensed Search), fetch rates and license options, mint one-time signed access tokens, retrieve licensed or indexed content, self-report usage, and list a property's content catalog. Reconstructed by API Evangelist from TollBit's published per-operation OpenAPI fragments (docs.tollbit.com/reference).\n\nContact Support:\n Name: TollBit\n Email: team@tollbit.com",
+      "type": "text/plain"
+    }
+  }
+}

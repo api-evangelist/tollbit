@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TollBit Auth Tokens Tollbit Subdomain API",
+    "version": "v2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tollbit Subdomain",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "TollbitSubdomain_getContent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.tollbit.com/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

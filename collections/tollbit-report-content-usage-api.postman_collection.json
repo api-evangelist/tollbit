@@ -1,0 +1,420 @@
+{
+  "item": [
+    {
+      "id": "b4026874-d7d9-45c0-8d89-a70fa5de7913",
+      "name": "Report Content Usage",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "43873286-1b3a-4b34-a78c-6e7f56a12e26",
+          "name": "Reporting Service report Content Usage",
+          "request": {
+            "name": "Reporting Service report Content Usage",
+            "description": {},
+            "url": {
+              "path": [
+                "dev",
+                "v2",
+                "transactions",
+                "selfReport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "TollbitKey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idempotencyId\": \"<string>\",\n  \"usage\": [\n    {\n      \"url\": \"<uri>\",\n      \"timesUsed\": \"<integer>\",\n      \"licensePermissions\": [\n        {\n          \"name\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\"\n        }\n      ],\n      \"licenseType\": \"<string>\",\n      \"licenseId\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    },\n    {\n      \"url\": \"<uri>\",\n      \"timesUsed\": \"<integer>\",\n      \"licensePermissions\": [\n        {\n          \"name\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\"\n        }\n      ],\n      \"licenseType\": \"<string>\",\n      \"licenseId\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": {}\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "865d7da8-546e-4ca8-9eba-f689bd2cac7f",
+              "name": "The request has succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dev",
+                    "v2",
+                    "transactions",
+                    "selfReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "TollbitKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idempotencyId\": \"<string>\",\n  \"usage\": [\n    {\n      \"url\": \"<uri>\",\n      \"timesUsed\": \"<integer>\",\n      \"licensePermissions\": [\n        {\n          \"name\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\"\n        }\n      ],\n      \"licenseType\": \"<string>\",\n      \"licenseId\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": {}\n      }\n    },\n    {\n      \"url\": \"<uri>\",\n      \"timesUsed\": \"<integer>\",\n      \"licensePermissions\": [\n        {\n          \"name\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\"\n        }\n      ],\n      \"licenseType\": \"<string>\",\n      \"licenseId\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"receipts\": [\n    {\n      \"url\": \"http://sdnrJYZMUcqEifElT.qenxazKlGLobpP9\",\n      \"perUnitPriceMicros\": 5428,\n      \"totalUsePriceMicros\": 8251,\n      \"currency\": \"string\",\n      \"license\": {\n        \"id\": \"string\",\n        \"licenseType\": \"string\",\n        \"licensePath\": \"string\",\n        \"permissions\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ]\n      }\n    },\n    {\n      \"url\": \"https://LZk.ucsqB2.HoIjbndE\",\n      \"perUnitPriceMicros\": 2527,\n      \"totalUsePriceMicros\": 7276,\n      \"currency\": \"string\",\n      \"license\": {\n        \"id\": \"string\",\n        \"licenseType\": \"string\",\n        \"licensePath\": \"string\",\n        \"permissions\": [\n          {\n            \"name\": \"string\"\n          },\n          {\n            \"name\": \"string\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62434c83-17ac-401c-9e5b-eee7f30df128",
+              "name": "The server could not understand the request due to invalid syntax.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dev",
+                    "v2",
+                    "transactions",
+                    "selfReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "TollbitKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idempotencyId\": \"<string>\",\n  \"usage\": [\n    {\n      \"url\": \"<uri>\",\n      \"timesUsed\": \"<integer>\",\n      \"licensePermissions\": [\n        {\n          \"name\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\"\n        }\n      ],\n      \"licenseType\": \"<string>\",\n      \"licenseId\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": {}\n      }\n    },\n    {\n      \"url\": \"<uri>\",\n      \"timesUsed\": \"<integer>\",\n      \"licensePermissions\": [\n        {\n          \"name\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\"\n        }\n      ],\n      \"licenseType\": \"<string>\",\n      \"licenseId\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 2879,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b4fd6eb-b1aa-4faf-a334-1e9ecdebb520",
+              "name": "Access is unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dev",
+                    "v2",
+                    "transactions",
+                    "selfReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "TollbitKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idempotencyId\": \"<string>\",\n  \"usage\": [\n    {\n      \"url\": \"<uri>\",\n      \"timesUsed\": \"<integer>\",\n      \"licensePermissions\": [\n        {\n          \"name\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\"\n        }\n      ],\n      \"licenseType\": \"<string>\",\n      \"licenseId\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": {}\n      }\n    },\n    {\n      \"url\": \"<uri>\",\n      \"timesUsed\": \"<integer>\",\n      \"licensePermissions\": [\n        {\n          \"name\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\"\n        }\n      ],\n      \"licenseType\": \"<string>\",\n      \"licenseId\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 2879,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "388faf18-6340-4666-80fa-348b33756609",
+              "name": "Access is forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dev",
+                    "v2",
+                    "transactions",
+                    "selfReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "TollbitKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idempotencyId\": \"<string>\",\n  \"usage\": [\n    {\n      \"url\": \"<uri>\",\n      \"timesUsed\": \"<integer>\",\n      \"licensePermissions\": [\n        {\n          \"name\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\"\n        }\n      ],\n      \"licenseType\": \"<string>\",\n      \"licenseId\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": {}\n      }\n    },\n    {\n      \"url\": \"<uri>\",\n      \"timesUsed\": \"<integer>\",\n      \"licensePermissions\": [\n        {\n          \"name\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\"\n        }\n      ],\n      \"licenseType\": \"<string>\",\n      \"licenseId\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 2879,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90b08512-face-4a15-ac4a-6d5805e94a3e",
+              "name": "The server cannot find the requested resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dev",
+                    "v2",
+                    "transactions",
+                    "selfReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "TollbitKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idempotencyId\": \"<string>\",\n  \"usage\": [\n    {\n      \"url\": \"<uri>\",\n      \"timesUsed\": \"<integer>\",\n      \"licensePermissions\": [\n        {\n          \"name\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\"\n        }\n      ],\n      \"licenseType\": \"<string>\",\n      \"licenseId\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": {}\n      }\n    },\n    {\n      \"url\": \"<uri>\",\n      \"timesUsed\": \"<integer>\",\n      \"licensePermissions\": [\n        {\n          \"name\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\"\n        }\n      ],\n      \"licenseType\": \"<string>\",\n      \"licenseId\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 2879,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7cd577a4-3a97-4262-9ab1-246af8707940",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dev",
+                    "v2",
+                    "transactions",
+                    "selfReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "TollbitKey",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idempotencyId\": \"<string>\",\n  \"usage\": [\n    {\n      \"url\": \"<uri>\",\n      \"timesUsed\": \"<integer>\",\n      \"licensePermissions\": [\n        {\n          \"name\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\"\n        }\n      ],\n      \"licenseType\": \"<string>\",\n      \"licenseId\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": {}\n      }\n    },\n    {\n      \"url\": \"<uri>\",\n      \"timesUsed\": \"<integer>\",\n      \"licensePermissions\": [\n        {\n          \"name\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\"\n        }\n      ],\n      \"licenseType\": \"<string>\",\n      \"licenseId\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"status\": 2879,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.tollbit.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2bbdef55-a6d9-4249-9f27-1aad3a72cfc6",
+    "name": "TollBit Auth Tokens Report Content Usage API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "TollBit is the web stack for the agentic internet: publishers analyze, control, and monetize AI agent access to their content. This API lets developers and AI agents discover licensable content (Licensed Search), fetch rates and license options, mint one-time signed access tokens, retrieve licensed or indexed content, self-report usage, and list a property's content catalog. Reconstructed by API Evangelist from TollBit's published per-operation OpenAPI fragments (docs.tollbit.com/reference).\n\nContact Support:\n Name: TollBit\n Email: team@tollbit.com",
+      "type": "text/plain"
+    }
+  }
+}
