@@ -1,20 +1,16 @@
 aid: tollbit
 name: Tollbit
-description: >-
-  TollBit is the web stack for the agentic internet, giving publishers and
-  commerce sites the infrastructure to analyze, control, and monetize AI agent
-  access to their content. Publishers verify a property, stream logs for AI-bot
-  analytics, and stand up an "Agent Site" front door (the tollbit.<domain>
-  subdomain) that separates bot traffic from humans and applies content controls,
-  licensing, and usage-based paywalls. Its developer API lets AI agents and
-  builders discover licensable content through Licensed Search, fetch rates and
-  license options, mint cryptographically signed one-time access tokens, retrieve
-  licensed or indexed content as markdown or HTML, self-report usage, and receive
-  webhook notifications when content changes. TollBit ships official Python and
-  Node SDKs, a native CLI with a bundled Agent Skill, an MCP toolbox server, and
-  additional agent access methods (NLWeb, Agent2Agent). Added to the API
-  Evangelist network as a portfolio company of Lightspeed Venture Partners and
-  enriched from its public developer surface.
+description: TollBit is the web stack for the agentic internet, giving publishers and commerce sites the
+  infrastructure to analyze, control, and monetize AI agent access to their content. Publishers verify
+  a property, stream logs for AI-bot analytics, and stand up an "Agent Site" front door (the tollbit.<domain>
+  subdomain) that separates bot traffic from humans and applies content controls, licensing, and usage-based
+  paywalls. Its developer API lets AI agents and builders discover licensable content through Licensed
+  Search, fetch rates and license options, mint cryptographically signed one-time access tokens, retrieve
+  licensed or indexed content as markdown or HTML, self-report usage, and receive webhook notifications
+  when content changes. TollBit ships official Python and Node SDKs, a native CLI with a bundled Agent
+  Skill, an MCP toolbox server, and additional agent access methods (NLWeb, Agent2Agent). Added to the
+  API Evangelist network as a portfolio company of Lightspeed Venture Partners and enriched from its public
+  developer surface.
 url: https://raw.githubusercontent.com/api-evangelist/tollbit/refs/heads/main/apis.yml
 deliveryModel:
   model: saas
@@ -50,7 +46,7 @@ x-tier: enriched
 x-tier-reason: portfolio-lead-enriched
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-09-16'
 tags:
 - Company
 - Content Licensing
@@ -140,7 +136,7 @@ apis:
   - type: DataModel
     url: data-model/tollbit-data-model.yml
 - aid: tollbit:tollbit-tollbit-content-api
-  name: Tollbit Tollbit Content API
+  name: Tollbit Content API
   description: The Tollbit Content API from Tollbit — 4 operation(s) for tollbit content.
   humanURL: https://docs.tollbit.com/reference
   baseURL: https://gateway.tollbit.com
@@ -158,7 +154,7 @@ apis:
   - type: DataModel
     url: data-model/tollbit-data-model.yml
 - aid: tollbit:tollbit-tollbit-subdomain-api
-  name: Tollbit Tollbit Subdomain API
+  name: Tollbit Subdomain API
   description: The Tollbit Subdomain API from Tollbit — 1 operation(s) for tollbit subdomain.
   humanURL: https://docs.tollbit.com/reference
   baseURL: https://gateway.tollbit.com
