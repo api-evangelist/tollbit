@@ -1,34 +1,33 @@
 {
   "provider": "tollbit",
   "sources": [
-    "tollbit-auth-tokens-api-openapi.yml",
-    "tollbit-dev-api-openapi.yml",
-    "tollbit-get-catalog-of-pages-for-property-api-openapi.yml",
-    "tollbit-get-tollbit-content-api-openapi.yml",
-    "tollbit-get-tollbit-rates-api-openapi.yml",
-    "tollbit-report-content-usage-api-openapi.yml",
-    "tollbit-reporting-api-openapi.yml",
-    "tollbit-search-api-openapi.yml",
-    "tollbit-search-content-api-openapi.yml",
-    "tollbit-tollbit-content-api-openapi.yml",
-    "tollbit-tollbit-subdomain-api-openapi.yml"
+    "_original/tollbit-openapi.json"
   ],
   "outputs": [
     "tollbit-auth-tokens-api-openapi.yml",
     "tollbit-dev-api-openapi.yml",
-    "tollbit-get-catalog-of-pages-for-property-api-openapi.yml",
-    "tollbit-get-tollbit-content-api-openapi.yml",
-    "tollbit-get-tollbit-rates-api-openapi.yml",
-    "tollbit-report-content-usage-api-openapi.yml",
     "tollbit-reporting-api-openapi.yml",
     "tollbit-search-api-openapi.yml",
-    "tollbit-search-content-api-openapi.yml",
     "tollbit-tollbit-content-api-openapi.yml",
     "tollbit-tollbit-subdomain-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "tollbit-openapi.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "tollbit-openapi.json: tagged paths GET /dev/v1/webhook/history -> Dev",
+    "tollbit-openapi.json: declared missing tag: Dev",
+    "tollbit-openapi.json: multi-axis tagging (11 tags, 6 first tags, 1.55x duplication over 11 operations) \u2014 split on first tag, 6 operations narrowed",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "tollbit-auth-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tollbit-dev-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tollbit-reporting-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tollbit-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tollbit-tollbit-content-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tollbit-tollbit-subdomain-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

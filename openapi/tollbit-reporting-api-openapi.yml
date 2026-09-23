@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: TollBit Auth Tokens Reporting API
+  title: TollBit Reporting API
   version: v2
   description: 'TollBit is the web stack for the agentic internet: publishers analyze, control, and monetize AI agent access to their content. This API lets developers and AI agents discover licensable content (Licensed Search), fetch rates and license options, mint one-time signed access tokens, retrieve licensed or indexed content, self-report usage, and list a property''s content catalog. Reconstructed by API Evangelist from TollBit''s published per-operation OpenAPI fragments (docs.tollbit.com/reference).'
   contact:
@@ -69,31 +69,32 @@ paths:
               $ref: '#/components/schemas/SelfReportContentUsageRequest'
       security:
       - ApiKeyAuth: []
+      summary: Reporting service report content usage
+      x-summary-source: derived
 components:
   schemas:
-    SelfReportLicensePermission:
+    SelfReportUsageReceipt:
       type: object
       required:
-      - name
+      - url
+      - perUnitPriceMicros
+      - totalUsePriceMicros
+      - currency
+      - license
       properties:
-        name:
+        url:
           type: string
-    SelfReportContentUsageResponse:
-      type: object
-      required:
-      - receipts
-      properties:
-        receipts:
-          type: array
-          items:
-            $ref: '#/components/schemas/SelfReportUsageReceipt'
-    RateLicensePermission:
-      type: object
-      required:
-      - name
-      properties:
-        name:
+          format: uri
+        perUnitPriceMicros:
+          type: integer
+          format: int64
+        totalUsePriceMicros:
+          type: integer
+          format: int64
+        currency:
           type: string
+        license:
+          $ref: '#/components/schemas/RateLicenseResponse'
     RateLicenseResponse:
       type: object
       required:
@@ -112,6 +113,32 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RateLicensePermission'
+    ProblemJSON:
+      type: object
+      required:
+      - type
+      - title
+      - status
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+      additionalProperties: {}
+    SelfReportLicensePermission:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
     SelfReportUsage:
       type: object
       required:
@@ -149,47 +176,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SelfReportUsage'
-    SelfReportUsageReceipt:
+    SelfReportContentUsageResponse:
       type: object
       required:
-      - url
-      - perUnitPriceMicros
-      - totalUsePriceMicros
-      - currency
-      - license
+      - receipts
       properties:
-        url:
-          type: string
-          format: uri
-        perUnitPriceMicros:
-          type: integer
-          format: int64
-        totalUsePriceMicros:
-          type: integer
-          format: int64
-        currency:
-          type: string
-        license:
-          $ref: '#/components/schemas/RateLicenseResponse'
-    ProblemJSON:
+        receipts:
+          type: array
+          items:
+            $ref: '#/components/schemas/SelfReportUsageReceipt'
+    RateLicensePermission:
       type: object
       required:
-      - type
-      - title
-      - status
+      - name
       properties:
-        type:
+        name:
           type: string
-        title:
-          type: string
-        status:
-          type: integer
-          format: int32
-        detail:
-          type: string
-        instance:
-          type: string
-      additionalProperties: {}
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

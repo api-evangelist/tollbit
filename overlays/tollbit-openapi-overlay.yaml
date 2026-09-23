@@ -1,6 +1,6 @@
-generated: '2026-07-21'
-method: generated
-source: openapi/tollbit-openapi.json
+x-generated: '2026-07-21'
+x-method: generated
+x-source: openapi/tollbit-openapi.json
 overlay: 1.0.0
 info:
   title: API Evangelist enhancements for the TollBit API

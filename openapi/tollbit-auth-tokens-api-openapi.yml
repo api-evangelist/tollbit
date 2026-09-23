@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   title: TollBit Auth Tokens API
   version: v2
@@ -69,6 +69,8 @@ paths:
               $ref: '#/components/schemas/CreateAOSAccessTokenRequest'
       security:
       - ApiKeyAuth: []
+      summary: Tokens service create AOS access token
+      x-summary-source: derived
   /dev/v2/tokens/content:
     post:
       operationId: TokensService_createContentAccessToken
@@ -120,6 +122,8 @@ paths:
               $ref: '#/components/schemas/CreateSubdomainAccessTokenRequest'
       security:
       - ApiKeyAuth: []
+      summary: Tokens service create content access token
+      x-summary-source: derived
   /dev/v2/tokens/crawl:
     post:
       operationId: TokensService_createCrawlAccessToken
@@ -171,40 +175,10 @@ paths:
               $ref: '#/components/schemas/CreateCrawlAccessTokenRequest'
       security:
       - ApiKeyAuth: []
+      summary: Tokens service create crawl access token
+      x-summary-source: derived
 components:
   schemas:
-    CreateCrawlAccessTokenRequest:
-      type: object
-      required:
-      - url
-      - userAgent
-      properties:
-        url:
-          type: string
-          format: uri
-        userAgent:
-          type: string
-    CreateCrawlAccessTokenResponse:
-      type: object
-      required:
-      - token
-      properties:
-        token:
-          type: string
-    CreateAOSAccessTokenResponse:
-      type: object
-      required:
-      - token
-      properties:
-        token:
-          type: string
-    CreateSubdomainAccessTokenResponse:
-      type: object
-      required:
-      - token
-      properties:
-        token:
-          type: string
     CreateSubdomainAccessTokenRequest:
       type: object
       required:
@@ -234,7 +208,7 @@ components:
           enum:
           - html
           - markdown
-    CreateAOSAccessTokenRequest:
+    CreateCrawlAccessTokenRequest:
       type: object
       required:
       - url
@@ -244,6 +218,13 @@ components:
           type: string
           format: uri
         userAgent:
+          type: string
+    CreateCrawlAccessTokenResponse:
+      type: object
+      required:
+      - token
+      properties:
+        token:
           type: string
     ProblemJSON:
       type: object
@@ -264,6 +245,31 @@ components:
         instance:
           type: string
       additionalProperties: {}
+    CreateAOSAccessTokenResponse:
+      type: object
+      required:
+      - token
+      properties:
+        token:
+          type: string
+    CreateAOSAccessTokenRequest:
+      type: object
+      required:
+      - url
+      - userAgent
+      properties:
+        url:
+          type: string
+          format: uri
+        userAgent:
+          type: string
+    CreateSubdomainAccessTokenResponse:
+      type: object
+      required:
+      - token
+      properties:
+        token:
+          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

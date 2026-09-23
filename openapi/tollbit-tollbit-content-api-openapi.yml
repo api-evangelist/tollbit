@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: TollBit Auth Tokens Tollbit Content API
+  title: Tollbit Content API
   version: v2
   description: 'TollBit is the web stack for the agentic internet: publishers analyze, control, and monetize AI agent access to their content. This API lets developers and AI agents discover licensable content (Licensed Search), fetch rates and license options, mint one-time signed access tokens, retrieve licensed or indexed content, self-report usage, and list a property''s content catalog. Reconstructed by API Evangelist from TollBit''s published per-operation OpenAPI fragments (docs.tollbit.com/reference).'
   contact:
@@ -68,6 +68,8 @@ paths:
       - Tollbit Content
       security:
       - ApiKeyAuth_: []
+      summary: Content service get content
+      x-summary-source: derived
   /dev/v2/content/{propertyDomain}/catalog/list:
     get:
       operationId: ContentService_getCatalog
@@ -131,6 +133,8 @@ paths:
       - Tollbit Content
       security:
       - ApiKeyAuth: []
+      summary: Content service get catalog
+      x-summary-source: derived
   /dev/v2/rates/batch:
     post:
       operationId: ContentService_batchGetRates
@@ -184,6 +188,8 @@ paths:
               $ref: '#/components/schemas/BatchGetRateRequest'
       security:
       - ApiKeyAuth: []
+      summary: Content service batch get rates
+      x-summary-source: derived
   /dev/v2/rates/{contentUrl}:
     get:
       operationId: ContentService_getRates
@@ -236,26 +242,10 @@ paths:
       - Tollbit Content
       security:
       - ApiKeyAuth: []
+      summary: Content service get rates
+      x-summary-source: derived
 components:
   schemas:
-    RateLicensePermission:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-    RatePriceResponse:
-      type: object
-      required:
-      - priceMicros
-      - currency
-      properties:
-        priceMicros:
-          type: integer
-          format: int64
-        currency:
-          type: string
     RateLicenseResponse:
       type: object
       required:
@@ -274,6 +264,25 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RateLicensePermission'
+    ProblemJSON:
+      type: object
+      required:
+      - type
+      - title
+      - status
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+      additionalProperties: {}
     GetContentResponse:
       type: object
       required:
@@ -286,18 +295,27 @@ components:
           $ref: '#/components/schemas/ContentMetadata'
         rate:
           $ref: '#/components/schemas/ContentRate'
-    BatchDeveloperRateResponse:
+    RatePrice:
       type: object
       required:
-      - price
-      - license
-      - error
+      - priceMicros
+      - currency
       properties:
-        price:
-          $ref: '#/components/schemas/RatePriceResponse'
-        license:
-          $ref: '#/components/schemas/BatchRateLicenseResponse'
-        error:
+        priceMicros:
+          type: integer
+          format: int64
+        currency:
+          type: string
+    RatePriceResponse:
+      type: object
+      required:
+      - priceMicros
+      - currency
+      properties:
+        priceMicros:
+          type: integer
+          format: int64
+        currency:
           type: string
     CatalogResponse:
       type: object
@@ -310,6 +328,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PropertyPage'
+    DeveloperRateResponse:
+      type: object
+      required:
+      - price
+      - license
+      properties:
+        price:
+          $ref: '#/components/schemas/RatePrice'
+        license:
+          $ref: '#/components/schemas/RateLicenseResponse'
     BatchRateResponseV2:
       type: object
       required:
@@ -322,36 +350,34 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BatchDeveloperRateResponse'
-    RatePrice:
+    PropertyPage:
       type: object
       required:
-      - priceMicros
-      - currency
+      - propertyId
+      - pageUrl
       properties:
-        priceMicros:
-          type: integer
-          format: int64
-        currency:
+        propertyId:
           type: string
-    ContentRate:
+        pageUrl:
+          type: string
+        lastMod:
+          type: string
+          format: date-time
+    ContentMetadata:
       type: object
-      required:
-      - price
-      - license
       properties:
-        price:
-          $ref: '#/components/schemas/RatePrice'
-        license:
-          $ref: '#/components/schemas/RateLicenseResponse'
-    BatchGetRateRequest:
-      type: object
-      required:
-      - urls
-      properties:
-        urls:
-          type: array
-          items:
-            type: string
+        title:
+          type: string
+        description:
+          type: string
+        imageUrl:
+          type: string
+        author:
+          type: string
+        published:
+          type: string
+        modified:
+          type: string
     PageContent:
       type: object
       required:
@@ -386,20 +412,7 @@ components:
             $ref: '#/components/schemas/RateLicensePermission'
         validUntil:
           type: string
-    PropertyPage:
-      type: object
-      required:
-      - propertyId
-      - pageUrl
-      properties:
-        propertyId:
-          type: string
-        pageUrl:
-          type: string
-        lastMod:
-          type: string
-          format: date-time
-    DeveloperRateResponse:
+    ContentRate:
       type: object
       required:
       - price
@@ -409,40 +422,35 @@ components:
           $ref: '#/components/schemas/RatePrice'
         license:
           $ref: '#/components/schemas/RateLicenseResponse'
-    ContentMetadata:
-      type: object
-      properties:
-        title:
-          type: string
-        description:
-          type: string
-        imageUrl:
-          type: string
-        author:
-          type: string
-        published:
-          type: string
-        modified:
-          type: string
-    ProblemJSON:
+    RateLicensePermission:
       type: object
       required:
-      - type
-      - title
-      - status
+      - name
       properties:
-        type:
+        name:
           type: string
-        title:
+    BatchDeveloperRateResponse:
+      type: object
+      required:
+      - price
+      - license
+      - error
+      properties:
+        price:
+          $ref: '#/components/schemas/RatePriceResponse'
+        license:
+          $ref: '#/components/schemas/BatchRateLicenseResponse'
+        error:
           type: string
-        status:
-          type: integer
-          format: int32
-        detail:
-          type: string
-        instance:
-          type: string
-      additionalProperties: {}
+    BatchGetRateRequest:
+      type: object
+      required:
+      - urls
+      properties:
+        urls:
+          type: array
+          items:
+            type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
