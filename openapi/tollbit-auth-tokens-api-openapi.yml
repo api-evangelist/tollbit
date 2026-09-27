@@ -179,6 +179,42 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    CreateCrawlAccessTokenRequest:
+      type: object
+      required:
+      - url
+      - userAgent
+      properties:
+        url:
+          type: string
+          format: uri
+        userAgent:
+          type: string
+    CreateSubdomainAccessTokenResponse:
+      type: object
+      required:
+      - token
+      properties:
+        token:
+          type: string
+    CreateAOSAccessTokenResponse:
+      type: object
+      required:
+      - token
+      properties:
+        token:
+          type: string
+    CreateAOSAccessTokenRequest:
+      type: object
+      required:
+      - url
+      - userAgent
+      properties:
+        url:
+          type: string
+          format: uri
+        userAgent:
+          type: string
     CreateSubdomainAccessTokenRequest:
       type: object
       required:
@@ -208,24 +244,6 @@ components:
           enum:
           - html
           - markdown
-    CreateCrawlAccessTokenRequest:
-      type: object
-      required:
-      - url
-      - userAgent
-      properties:
-        url:
-          type: string
-          format: uri
-        userAgent:
-          type: string
-    CreateCrawlAccessTokenResponse:
-      type: object
-      required:
-      - token
-      properties:
-        token:
-          type: string
     ProblemJSON:
       type: object
       required:
@@ -245,25 +263,7 @@ components:
         instance:
           type: string
       additionalProperties: {}
-    CreateAOSAccessTokenResponse:
-      type: object
-      required:
-      - token
-      properties:
-        token:
-          type: string
-    CreateAOSAccessTokenRequest:
-      type: object
-      required:
-      - url
-      - userAgent
-      properties:
-        url:
-          type: string
-          format: uri
-        userAgent:
-          type: string
-    CreateSubdomainAccessTokenResponse:
+    CreateCrawlAccessTokenResponse:
       type: object
       required:
       - token

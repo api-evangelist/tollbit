@@ -113,45 +113,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ProblemJSON:
-      type: object
-      required:
-      - type
-      - title
-      - status
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        status:
-          type: integer
-          format: int32
-        detail:
-          type: string
-        instance:
-          type: string
-      additionalProperties: {}
-    Publisher:
-      type: object
-      required:
-      - domain
-      - name
-      properties:
-        domain:
-          type: string
-        name:
-          type: string
-    Availability:
-      type: object
-      required:
-      - discoverable
-      - readyToLicense
-      properties:
-        discoverable:
-          type: boolean
-        readyToLicense:
-          type: boolean
     PagedSearchResultResponse:
       type: object
       allOf:
@@ -166,6 +127,26 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/SearchResult'
+    Availability:
+      type: object
+      required:
+      - discoverable
+      - readyToLicense
+      properties:
+        discoverable:
+          type: boolean
+        readyToLicense:
+          type: boolean
+    Publisher:
+      type: object
+      required:
+      - domain
+      - name
+      properties:
+        domain:
+          type: string
+        name:
+          type: string
     SearchResult:
       type: object
       required:
@@ -185,6 +166,25 @@ components:
           $ref: '#/components/schemas/Publisher'
         availability:
           $ref: '#/components/schemas/Availability'
+    ProblemJSON:
+      type: object
+      required:
+      - type
+      - title
+      - status
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+      additionalProperties: {}
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
