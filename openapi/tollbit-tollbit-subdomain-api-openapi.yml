@@ -79,6 +79,19 @@ components:
       properties:
         name:
           type: string
+    TollBit.Apis.PageContent:
+      type: object
+      required:
+      - header
+      - body
+      - footer
+      properties:
+        header:
+          type: string
+        body:
+          type: string
+        footer:
+          type: string
     TollBit.Apis.ProblemJSON:
       type: object
       required:
@@ -108,6 +121,35 @@ components:
           $ref: '#/components/schemas/TollBit.Apis.RatePrice'
         license:
           $ref: '#/components/schemas/TollBit.Apis.RateLicenseResponse'
+    TollBit.Apis.RateLicenseResponse:
+      type: object
+      required:
+      - id
+      - licenseType
+      - licensePath
+      - permissions
+      properties:
+        id:
+          type: string
+        licenseType:
+          type: string
+        licensePath:
+          type: string
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TollBit.Apis.RateLicensePermission'
+    TollBit.Apis.RatePrice:
+      type: object
+      required:
+      - priceMicros
+      - currency
+      properties:
+        priceMicros:
+          type: integer
+          format: int64
+        currency:
+          type: string
     TollBit.Apis.ContentMetadata:
       type: object
       properties:
@@ -135,48 +177,6 @@ components:
           $ref: '#/components/schemas/TollBit.Apis.ContentMetadata'
         rate:
           $ref: '#/components/schemas/TollBit.Apis.ContentRate'
-    TollBit.Apis.RateLicenseResponse:
-      type: object
-      required:
-      - id
-      - licenseType
-      - licensePath
-      - permissions
-      properties:
-        id:
-          type: string
-        licenseType:
-          type: string
-        licensePath:
-          type: string
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/TollBit.Apis.RateLicensePermission'
-    TollBit.Apis.PageContent:
-      type: object
-      required:
-      - header
-      - body
-      - footer
-      properties:
-        header:
-          type: string
-        body:
-          type: string
-        footer:
-          type: string
-    TollBit.Apis.RatePrice:
-      type: object
-      required:
-      - priceMicros
-      - currency
-      properties:
-        priceMicros:
-          type: integer
-          format: int64
-        currency:
-          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

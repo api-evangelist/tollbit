@@ -59,17 +59,6 @@ paths:
       - Dev
 components:
   schemas:
-    WebhookHistoryResponse:
-      type: object
-      properties:
-        Items:
-          type: array
-          description: Array of webhook delivery records.
-          items:
-            $ref: '#/components/schemas/WebhookHistoryItem'
-        nextToken:
-          type: string
-          description: Optional continuation token if there are more results.
     WebhookHistoryItem:
       type: object
       properties:
@@ -98,6 +87,17 @@ components:
         numAttempts:
           type: integer
           description: Number of delivery attempts.
+    WebhookHistoryResponse:
+      type: object
+      properties:
+        Items:
+          type: array
+          description: Array of webhook delivery records.
+          items:
+            $ref: '#/components/schemas/WebhookHistoryItem'
+        nextToken:
+          type: string
+          description: Optional continuation token if there are more results.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -80,6 +80,53 @@ components:
       properties:
         name:
           type: string
+    ProblemJSON:
+      type: object
+      required:
+      - type
+      - title
+      - status
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+      additionalProperties: {}
+    SelfReportContentUsageResponse:
+      type: object
+      required:
+      - receipts
+      properties:
+        receipts:
+          type: array
+          items:
+            $ref: '#/components/schemas/SelfReportUsageReceipt'
+    RateLicensePermission:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+    SelfReportContentUsageRequest:
+      type: object
+      required:
+      - idempotencyId
+      - usage
+      properties:
+        idempotencyId:
+          type: string
+        usage:
+          type: array
+          items:
+            $ref: '#/components/schemas/SelfReportUsage'
     SelfReportUsage:
       type: object
       required:
@@ -105,6 +152,24 @@ components:
         metadata:
           type: object
           additionalProperties: {}
+    RateLicenseResponse:
+      type: object
+      required:
+      - id
+      - licenseType
+      - licensePath
+      - permissions
+      properties:
+        id:
+          type: string
+        licenseType:
+          type: string
+        licensePath:
+          type: string
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RateLicensePermission'
     SelfReportUsageReceipt:
       type: object
       required:
@@ -127,71 +192,6 @@ components:
           type: string
         license:
           $ref: '#/components/schemas/RateLicenseResponse'
-    SelfReportContentUsageRequest:
-      type: object
-      required:
-      - idempotencyId
-      - usage
-      properties:
-        idempotencyId:
-          type: string
-        usage:
-          type: array
-          items:
-            $ref: '#/components/schemas/SelfReportUsage'
-    RateLicensePermission:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-    SelfReportContentUsageResponse:
-      type: object
-      required:
-      - receipts
-      properties:
-        receipts:
-          type: array
-          items:
-            $ref: '#/components/schemas/SelfReportUsageReceipt'
-    RateLicenseResponse:
-      type: object
-      required:
-      - id
-      - licenseType
-      - licensePath
-      - permissions
-      properties:
-        id:
-          type: string
-        licenseType:
-          type: string
-        licensePath:
-          type: string
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/RateLicensePermission'
-    ProblemJSON:
-      type: object
-      required:
-      - type
-      - title
-      - status
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        status:
-          type: integer
-          format: int32
-        detail:
-          type: string
-        instance:
-          type: string
-      additionalProperties: {}
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

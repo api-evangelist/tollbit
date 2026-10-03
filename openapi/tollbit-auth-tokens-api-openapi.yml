@@ -179,7 +179,7 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    CreateCrawlAccessTokenRequest:
+    CreateAOSAccessTokenRequest:
       type: object
       required:
       - url
@@ -197,6 +197,32 @@ components:
       properties:
         token:
           type: string
+    ProblemJSON:
+      type: object
+      required:
+      - type
+      - title
+      - status
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+      additionalProperties: {}
+    CreateCrawlAccessTokenResponse:
+      type: object
+      required:
+      - token
+      properties:
+        token:
+          type: string
     CreateAOSAccessTokenResponse:
       type: object
       required:
@@ -204,7 +230,7 @@ components:
       properties:
         token:
           type: string
-    CreateAOSAccessTokenRequest:
+    CreateCrawlAccessTokenRequest:
       type: object
       required:
       - url
@@ -244,32 +270,6 @@ components:
           enum:
           - html
           - markdown
-    ProblemJSON:
-      type: object
-      required:
-      - type
-      - title
-      - status
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        status:
-          type: integer
-          format: int32
-        detail:
-          type: string
-        instance:
-          type: string
-      additionalProperties: {}
-    CreateCrawlAccessTokenResponse:
-      type: object
-      required:
-      - token
-      properties:
-        token:
-          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
