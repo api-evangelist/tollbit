@@ -172,6 +172,9 @@ apis:
   - type: DataModel
     url: data-model/tollbit-data-model.yml
 common:
+- type: CapabilityMap
+  url: capabilities/tollbit-capability-edges.yml
+  name: Tollbit Business Capability Map
 - type: Overlay
   url: overlays/tollbit-openapi-overlay.yaml
 - type: DomainSecurity

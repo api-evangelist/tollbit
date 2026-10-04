@@ -1,0 +1,26 @@
+slug: tollbit
+provider: Tollbit
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Reporting
+  spec_file: tollbit-reporting-api-openapi.yml
+  capability_id: BC-4250.10
+  capability_id_l1: BC-4250
+  capability_name: Usage Metering
+  confidence: 0.75
+  evidence: POST /dev/v2/transactions/selfReport  ReportingService_reportContentUsage; schemas SelfReportUsage,
+    SelfReportUsageReceipt, RateLicenseResponse
+  reason: Agents self-report content usage events against license rates, which is ingestion of usage events
+    feeding downstream rating/charging — usage metering in the subscription billing capability. The rate/license
+    schemas tie it to monetisation rather than product analytics.
