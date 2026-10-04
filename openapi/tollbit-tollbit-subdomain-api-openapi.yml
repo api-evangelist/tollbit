@@ -72,13 +72,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    TollBit.Apis.RateLicensePermission:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
     TollBit.Apis.PageContent:
       type: object
       required:
@@ -111,6 +104,28 @@ components:
         instance:
           type: string
       additionalProperties: {}
+    TollBit.Apis.ContentMetadata:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        imageUrl:
+          type: string
+        author:
+          type: string
+        published:
+          type: string
+        modified:
+          type: string
+    TollBit.Apis.RateLicensePermission:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
     TollBit.Apis.ContentRate:
       type: object
       required:
@@ -139,32 +154,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TollBit.Apis.RateLicensePermission'
-    TollBit.Apis.RatePrice:
-      type: object
-      required:
-      - priceMicros
-      - currency
-      properties:
-        priceMicros:
-          type: integer
-          format: int64
-        currency:
-          type: string
-    TollBit.Apis.ContentMetadata:
-      type: object
-      properties:
-        title:
-          type: string
-        description:
-          type: string
-        imageUrl:
-          type: string
-        author:
-          type: string
-        published:
-          type: string
-        modified:
-          type: string
     TollBit.Apis.GetContentResponse:
       type: object
       required:
@@ -177,6 +166,17 @@ components:
           $ref: '#/components/schemas/TollBit.Apis.ContentMetadata'
         rate:
           $ref: '#/components/schemas/TollBit.Apis.ContentRate'
+    TollBit.Apis.RatePrice:
+      type: object
+      required:
+      - priceMicros
+      - currency
+      properties:
+        priceMicros:
+          type: integer
+          format: int64
+        currency:
+          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

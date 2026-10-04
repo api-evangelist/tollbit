@@ -73,6 +73,58 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    SelfReportUsageReceipt:
+      type: object
+      required:
+      - url
+      - perUnitPriceMicros
+      - totalUsePriceMicros
+      - currency
+      - license
+      properties:
+        url:
+          type: string
+          format: uri
+        perUnitPriceMicros:
+          type: integer
+          format: int64
+        totalUsePriceMicros:
+          type: integer
+          format: int64
+        currency:
+          type: string
+        license:
+          $ref: '#/components/schemas/RateLicenseResponse'
+    SelfReportContentUsageRequest:
+      type: object
+      required:
+      - idempotencyId
+      - usage
+      properties:
+        idempotencyId:
+          type: string
+        usage:
+          type: array
+          items:
+            $ref: '#/components/schemas/SelfReportUsage'
+    RateLicenseResponse:
+      type: object
+      required:
+      - id
+      - licenseType
+      - licensePath
+      - permissions
+      properties:
+        id:
+          type: string
+        licenseType:
+          type: string
+        licensePath:
+          type: string
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RateLicensePermission'
     SelfReportLicensePermission:
       type: object
       required:
@@ -99,6 +151,13 @@ components:
         instance:
           type: string
       additionalProperties: {}
+    RateLicensePermission:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
     SelfReportContentUsageResponse:
       type: object
       required:
@@ -108,25 +167,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SelfReportUsageReceipt'
-    RateLicensePermission:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-    SelfReportContentUsageRequest:
-      type: object
-      required:
-      - idempotencyId
-      - usage
-      properties:
-        idempotencyId:
-          type: string
-        usage:
-          type: array
-          items:
-            $ref: '#/components/schemas/SelfReportUsage'
     SelfReportUsage:
       type: object
       required:
@@ -152,46 +192,6 @@ components:
         metadata:
           type: object
           additionalProperties: {}
-    RateLicenseResponse:
-      type: object
-      required:
-      - id
-      - licenseType
-      - licensePath
-      - permissions
-      properties:
-        id:
-          type: string
-        licenseType:
-          type: string
-        licensePath:
-          type: string
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/RateLicensePermission'
-    SelfReportUsageReceipt:
-      type: object
-      required:
-      - url
-      - perUnitPriceMicros
-      - totalUsePriceMicros
-      - currency
-      - license
-      properties:
-        url:
-          type: string
-          format: uri
-        perUnitPriceMicros:
-          type: integer
-          format: int64
-        totalUsePriceMicros:
-          type: integer
-          format: int64
-        currency:
-          type: string
-        license:
-          $ref: '#/components/schemas/RateLicenseResponse'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
