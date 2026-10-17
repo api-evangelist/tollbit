@@ -179,14 +179,29 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    CreateSubdomainAccessTokenResponse:
+    CreateAOSAccessTokenRequest:
       type: object
       required:
-      - token
+      - url
+      - userAgent
       properties:
-        token:
+        url:
           type: string
-    CreateAOSAccessTokenResponse:
+          format: uri
+        userAgent:
+          type: string
+    CreateCrawlAccessTokenRequest:
+      type: object
+      required:
+      - url
+      - userAgent
+      properties:
+        url:
+          type: string
+          format: uri
+        userAgent:
+          type: string
+    CreateSubdomainAccessTokenResponse:
       type: object
       required:
       - token
@@ -222,35 +237,6 @@ components:
           enum:
           - html
           - markdown
-    CreateAOSAccessTokenRequest:
-      type: object
-      required:
-      - url
-      - userAgent
-      properties:
-        url:
-          type: string
-          format: uri
-        userAgent:
-          type: string
-    CreateCrawlAccessTokenResponse:
-      type: object
-      required:
-      - token
-      properties:
-        token:
-          type: string
-    CreateCrawlAccessTokenRequest:
-      type: object
-      required:
-      - url
-      - userAgent
-      properties:
-        url:
-          type: string
-          format: uri
-        userAgent:
-          type: string
     ProblemJSON:
       type: object
       required:
@@ -270,6 +256,20 @@ components:
         instance:
           type: string
       additionalProperties: {}
+    CreateCrawlAccessTokenResponse:
+      type: object
+      required:
+      - token
+      properties:
+        token:
+          type: string
+    CreateAOSAccessTokenResponse:
+      type: object
+      required:
+      - token
+      properties:
+        token:
+          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

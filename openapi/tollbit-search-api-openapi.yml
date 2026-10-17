@@ -113,6 +113,30 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    Availability:
+      type: object
+      required:
+      - discoverable
+      - readyToLicense
+      properties:
+        discoverable:
+          type: boolean
+        readyToLicense:
+          type: boolean
+    PagedSearchResultResponse:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - nextToken
+        - items
+        properties:
+          nextToken:
+            type: string
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/SearchResult'
     SearchResult:
       type: object
       required:
@@ -132,20 +156,6 @@ components:
           $ref: '#/components/schemas/Publisher'
         availability:
           $ref: '#/components/schemas/Availability'
-    PagedSearchResultResponse:
-      type: object
-      allOf:
-      - type: object
-        required:
-        - nextToken
-        - items
-        properties:
-          nextToken:
-            type: string
-          items:
-            type: array
-            items:
-              $ref: '#/components/schemas/SearchResult'
     Publisher:
       type: object
       required:
@@ -175,16 +185,6 @@ components:
         instance:
           type: string
       additionalProperties: {}
-    Availability:
-      type: object
-      required:
-      - discoverable
-      - readyToLicense
-      properties:
-        discoverable:
-          type: boolean
-        readyToLicense:
-          type: boolean
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

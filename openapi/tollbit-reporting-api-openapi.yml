@@ -73,6 +73,31 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    SelfReportUsage:
+      type: object
+      required:
+      - url
+      - timesUsed
+      - licensePermissions
+      - licenseType
+      properties:
+        url:
+          type: string
+          format: uri
+        timesUsed:
+          type: integer
+          format: int32
+        licensePermissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SelfReportLicensePermission'
+        licenseId:
+          type: string
+        licenseType:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: {}
     SelfReportUsageReceipt:
       type: object
       required:
@@ -95,6 +120,39 @@ components:
           type: string
         license:
           $ref: '#/components/schemas/RateLicenseResponse'
+    SelfReportLicensePermission:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+    RateLicensePermission:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+    ProblemJSON:
+      type: object
+      required:
+      - type
+      - title
+      - status
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+      additionalProperties: {}
     SelfReportContentUsageRequest:
       type: object
       required:
@@ -125,39 +183,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RateLicensePermission'
-    SelfReportLicensePermission:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-    ProblemJSON:
-      type: object
-      required:
-      - type
-      - title
-      - status
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        status:
-          type: integer
-          format: int32
-        detail:
-          type: string
-        instance:
-          type: string
-      additionalProperties: {}
-    RateLicensePermission:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
     SelfReportContentUsageResponse:
       type: object
       required:
@@ -167,31 +192,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SelfReportUsageReceipt'
-    SelfReportUsage:
-      type: object
-      required:
-      - url
-      - timesUsed
-      - licensePermissions
-      - licenseType
-      properties:
-        url:
-          type: string
-          format: uri
-        timesUsed:
-          type: integer
-          format: int32
-        licensePermissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/SelfReportLicensePermission'
-        licenseId:
-          type: string
-        licenseType:
-          type: string
-        metadata:
-          type: object
-          additionalProperties: {}
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

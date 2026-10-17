@@ -246,92 +246,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ContentRate:
-      type: object
-      required:
-      - price
-      - license
-      properties:
-        price:
-          $ref: '#/components/schemas/RatePrice'
-        license:
-          $ref: '#/components/schemas/RateLicenseResponse'
-    CatalogResponse:
-      type: object
-      required:
-      - pages
-      properties:
-        pageToken:
-          type: string
-        pages:
-          type: array
-          items:
-            $ref: '#/components/schemas/PropertyPage'
-    RatePriceResponse:
-      type: object
-      required:
-      - priceMicros
-      - currency
-      properties:
-        priceMicros:
-          type: integer
-          format: int64
-        currency:
-          type: string
-    BatchDeveloperRateResponse:
-      type: object
-      required:
-      - price
-      - license
-      - error
-      properties:
-        price:
-          $ref: '#/components/schemas/RatePriceResponse'
-        license:
-          $ref: '#/components/schemas/BatchRateLicenseResponse'
-        error:
-          type: string
-    PropertyPage:
-      type: object
-      required:
-      - propertyId
-      - pageUrl
-      properties:
-        propertyId:
-          type: string
-        pageUrl:
-          type: string
-        lastMod:
-          type: string
-          format: date-time
-    RateLicenseResponse:
-      type: object
-      required:
-      - id
-      - licenseType
-      - licensePath
-      - permissions
-      properties:
-        id:
-          type: string
-        licenseType:
-          type: string
-        licensePath:
-          type: string
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/RateLicensePermission'
-    DeveloperRateResponse:
-      type: object
-      required:
-      - price
-      - license
-      properties:
-        price:
-          $ref: '#/components/schemas/RatePrice'
-        license:
-          $ref: '#/components/schemas/RateLicenseResponse'
     BatchRateLicenseResponse:
       type: object
       required:
@@ -353,6 +267,91 @@ components:
             $ref: '#/components/schemas/RateLicensePermission'
         validUntil:
           type: string
+    ContentRate:
+      type: object
+      required:
+      - price
+      - license
+      properties:
+        price:
+          $ref: '#/components/schemas/RatePrice'
+        license:
+          $ref: '#/components/schemas/RateLicenseResponse'
+    BatchDeveloperRateResponse:
+      type: object
+      required:
+      - price
+      - license
+      - error
+      properties:
+        price:
+          $ref: '#/components/schemas/RatePriceResponse'
+        license:
+          $ref: '#/components/schemas/BatchRateLicenseResponse'
+        error:
+          type: string
+    DeveloperRateResponse:
+      type: object
+      required:
+      - price
+      - license
+      properties:
+        price:
+          $ref: '#/components/schemas/RatePrice'
+        license:
+          $ref: '#/components/schemas/RateLicenseResponse'
+    PropertyPage:
+      type: object
+      required:
+      - propertyId
+      - pageUrl
+      properties:
+        propertyId:
+          type: string
+        pageUrl:
+          type: string
+        lastMod:
+          type: string
+          format: date-time
+    ContentMetadata:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        imageUrl:
+          type: string
+        author:
+          type: string
+        published:
+          type: string
+        modified:
+          type: string
+    RatePriceResponse:
+      type: object
+      required:
+      - priceMicros
+      - currency
+      properties:
+        priceMicros:
+          type: integer
+          format: int64
+        currency:
+          type: string
+    PageContent:
+      type: object
+      required:
+      - header
+      - body
+      - footer
+      properties:
+        header:
+          type: string
+        body:
+          type: string
+        footer:
+          type: string
     GetContentResponse:
       type: object
       required:
@@ -365,6 +364,13 @@ components:
           $ref: '#/components/schemas/ContentMetadata'
         rate:
           $ref: '#/components/schemas/ContentRate'
+    RateLicensePermission:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
     BatchRateResponseV2:
       type: object
       required:
@@ -396,35 +402,17 @@ components:
         instance:
           type: string
       additionalProperties: {}
-    RateLicensePermission:
+    CatalogResponse:
       type: object
       required:
-      - name
+      - pages
       properties:
-        name:
+        pageToken:
           type: string
-    BatchGetRateRequest:
-      type: object
-      required:
-      - urls
-      properties:
-        urls:
+        pages:
           type: array
           items:
-            type: string
-    PageContent:
-      type: object
-      required:
-      - header
-      - body
-      - footer
-      properties:
-        header:
-          type: string
-        body:
-          type: string
-        footer:
-          type: string
+            $ref: '#/components/schemas/PropertyPage'
     RatePrice:
       type: object
       required:
@@ -436,21 +424,33 @@ components:
           format: int64
         currency:
           type: string
-    ContentMetadata:
+    RateLicenseResponse:
       type: object
+      required:
+      - id
+      - licenseType
+      - licensePath
+      - permissions
       properties:
-        title:
+        id:
           type: string
-        description:
+        licenseType:
           type: string
-        imageUrl:
+        licensePath:
           type: string
-        author:
-          type: string
-        published:
-          type: string
-        modified:
-          type: string
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RateLicensePermission'
+    BatchGetRateRequest:
+      type: object
+      required:
+      - urls
+      properties:
+        urls:
+          type: array
+          items:
+            type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -85,25 +85,17 @@ components:
           type: string
         footer:
           type: string
-    TollBit.Apis.ProblemJSON:
+    TollBit.Apis.RatePrice:
       type: object
       required:
-      - type
-      - title
-      - status
+      - priceMicros
+      - currency
       properties:
-        type:
-          type: string
-        title:
-          type: string
-        status:
+        priceMicros:
           type: integer
-          format: int32
-        detail:
+          format: int64
+        currency:
           type: string
-        instance:
-          type: string
-      additionalProperties: {}
     TollBit.Apis.ContentMetadata:
       type: object
       properties:
@@ -126,16 +118,18 @@ components:
       properties:
         name:
           type: string
-    TollBit.Apis.ContentRate:
+    TollBit.Apis.GetContentResponse:
       type: object
       required:
-      - price
-      - license
+      - content
+      - metadata
       properties:
-        price:
-          $ref: '#/components/schemas/TollBit.Apis.RatePrice'
-        license:
-          $ref: '#/components/schemas/TollBit.Apis.RateLicenseResponse'
+        content:
+          $ref: '#/components/schemas/TollBit.Apis.PageContent'
+        metadata:
+          $ref: '#/components/schemas/TollBit.Apis.ContentMetadata'
+        rate:
+          $ref: '#/components/schemas/TollBit.Apis.ContentRate'
     TollBit.Apis.RateLicenseResponse:
       type: object
       required:
@@ -154,29 +148,35 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TollBit.Apis.RateLicensePermission'
-    TollBit.Apis.GetContentResponse:
+    TollBit.Apis.ProblemJSON:
       type: object
       required:
-      - content
-      - metadata
+      - type
+      - title
+      - status
       properties:
-        content:
-          $ref: '#/components/schemas/TollBit.Apis.PageContent'
-        metadata:
-          $ref: '#/components/schemas/TollBit.Apis.ContentMetadata'
-        rate:
-          $ref: '#/components/schemas/TollBit.Apis.ContentRate'
-    TollBit.Apis.RatePrice:
-      type: object
-      required:
-      - priceMicros
-      - currency
-      properties:
-        priceMicros:
-          type: integer
-          format: int64
-        currency:
+        type:
           type: string
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+        detail:
+          type: string
+        instance:
+          type: string
+      additionalProperties: {}
+    TollBit.Apis.ContentRate:
+      type: object
+      required:
+      - price
+      - license
+      properties:
+        price:
+          $ref: '#/components/schemas/TollBit.Apis.RatePrice'
+        license:
+          $ref: '#/components/schemas/TollBit.Apis.RateLicenseResponse'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
